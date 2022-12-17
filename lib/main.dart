@@ -1,17 +1,32 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:raw/app/app.dart';
 import 'package:raw/app/locator/locator.dart';
+import 'package:raw/app/services/router_service.dart';
+import 'package:raw/app/utils/constants.dart';
 
-main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  /// Sets logging level
+  await Firebase.initializeApp();
   Logger.level = Level.debug;
-
-  /// Register all the models and services before the app starts
   setupLocator();
+  runApp(const App());
+}
 
-  /// Runs the app :)
-  runApp(RawApp());
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final RouterService routerService = locator<RouterService>();
+
+    return MaterialApp.router(
+      title: 'Aaab',
+      theme: AppThemes().lightTheme,
+      darkTheme: AppThemes().darkTheme,
+      routerDelegate: routerService.router.delegate(),
+      routeInformationParser: routerService.router.defaultRouteParser(),
+    );
+  }
 }

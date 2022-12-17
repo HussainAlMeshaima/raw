@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923973997431",
+    "project_id": "raw-sen",
+    "storage_bucket": "raw-sen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923973997431:android:1a3f17a2b08dcb8faec772",
+        "android_client_info": {
+          "package_name": "com.example.raw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923973997431-ts20j4n4bp2a2tof2a5g2i9o29jskdpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjm2IOC3q_05mxrDv7rsNmEtgBY2HHVqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923973997431-ts20j4n4bp2a2tof2a5g2i9o29jskdpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
