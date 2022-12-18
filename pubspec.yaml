@@ -19,6 +19,8 @@ dependencies:
   firebase_storage: ^11.0.8
   http: ^0.13.5
   path_provider: ^2.0.11
+  flutter_svg: ^1.1.6
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -35,9 +37,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-# Assets Example
-#  assets:
-#    - assets/images/
+  assets:
+    - assets/images/
 #
 # Fonts Example
 #  fonts:

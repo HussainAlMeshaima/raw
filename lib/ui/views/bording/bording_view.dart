@@ -3,6 +3,7 @@ import 'package:raw/app/utils/constants.dart';
 import 'package:stacked/stacked.dart';
 
 import './bording_view_model.dart';
+import '../../../app/utils/images.dart';
 
 class BordingView extends StatelessWidget {
   const BordingView({Key? key}) : super(key: key);
@@ -23,14 +24,14 @@ class BordingView extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                height: 550,
-                width: 900,
+                height: 500,
+                width: 500,
                 decoration: BoxDecoration(color: Color(0xff14213D)),
                 child: Center(
-                  child: Text(
-                    'Logo Here',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: Image.asset(Images.whiteLogo),
+                  // SvgPicture.asset(
+                  //   Images.whiteLogoSvg,
+                  // ),
                 ),
               ),
               Padding(
