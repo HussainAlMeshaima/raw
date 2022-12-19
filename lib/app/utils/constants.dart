@@ -42,6 +42,6 @@ class AppImages {
 }
 
 class AppSvgs {
-  final SvgPicture svgWhiteLogo = SvgPicture.asset('/assets/svgs/white_logo.svg');
+  final SvgPicture svgWhiteLogo = SvgPicture.asset('assets/svgs/white_logo.svg');
   final SvgPicture svgColoredLogo = SvgPicture.asset('assets/svgs/color_logo.svg');
 }

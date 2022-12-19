@@ -25,6 +25,7 @@ class App extends StatelessWidget {
       title: 'Aaab',
       theme: AppThemes().lightTheme,
       darkTheme: AppThemes().darkTheme,
+      debugShowCheckedModeBanner: false,
       routerDelegate: routerService.router.delegate(),
       routeInformationParser: routerService.router.defaultRouteParser(),
     );

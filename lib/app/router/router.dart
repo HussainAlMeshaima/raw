@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:raw/ui/views/home/home_view.dart';
 import 'package:raw/ui/views/otp/otp_view.dart';
+import 'package:raw/ui/views/settings/settings_view.dart';
 import 'package:raw/ui/views/startup/startup_view.dart';
 
 import '../../ui/views/address/address_view.dart';
@@ -20,12 +21,13 @@ export './router.gr.dart';
     AdaptiveRoute(page: BordingView),
     AdaptiveRoute(page: LoginView),
     AdaptiveRoute(page: SignUpView),
-    AdaptiveRoute(page: HomeView, initial: true),
+    AdaptiveRoute(page: HomeView),
     AdaptiveRoute(page: OtpView),
     AdaptiveRoute(page: AddressView),
     AdaptiveRoute(page: ProfileView),
     AdaptiveRoute(page: PhotographerView),
     AdaptiveRoute(page: VideographerView),
+    AdaptiveRoute(page: SettingsView, initial: true),
   ],
 )
 class $RawRouter {}
