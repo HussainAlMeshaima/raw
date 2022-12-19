@@ -15,7 +15,7 @@ class HomeSearchTextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 25),
+            padding: const EdgeInsets.only(top: 15),
             child: SizedBox(
               height: 43,
               child: Center(
@@ -52,7 +52,7 @@ class HomeSearchTextFieldWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 8),
         ],
       );
 }

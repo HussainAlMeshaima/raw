@@ -21,26 +21,25 @@ class HomeSliderWidget extends StatelessWidget {
         color: AppColors().primary,
       ),
     ),
-    const HomeAdClickableWidget(
-        title: 'Photography', desc: 'some description here', adImage: ''),
-    const HomeAdClickableWidget(
-        title: 'Videography', desc: 'some description here', adImage: ''),
-    const HomeAdClickableWidget(
-        title: 'Studio', desc: 'some description here', adImage: ''),
-    const HomeAdClickableWidget(
-        title: 'Rent', desc: 'some description here', adImage: ''),
+    const HomeAdClickableWidget(title: 'Photography', desc: 'some description here', adImage: ''),
+    const HomeAdClickableWidget(title: 'Videography', desc: 'some description here', adImage: ''),
+    const HomeAdClickableWidget(title: 'Studio', desc: 'some description here', adImage: ''),
+    const HomeAdClickableWidget(title: 'Rent', desc: 'some description here', adImage: ''),
   ];
 
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          CarouselSlider(
-            items: list,
-            options: CarouselOptions(
-              height: 160,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              onPageChanged: (index, reason) => model.updateIndex(value: index),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: CarouselSlider(
+              items: list,
+              options: CarouselOptions(
+                height: 160,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) => model.updateIndex(value: index),
+              ),
             ),
           ),
           Row(
@@ -50,13 +49,8 @@ class HomeSliderWidget extends StatelessWidget {
                 child: Container(
                   width: 12.0,
                   height: 12.0,
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: model.current == entry.key
-                          ? AppColors().secondary
-                          : Colors.grey),
+                  margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: model.current == entry.key ? AppColors().secondary : Colors.grey),
                 ),
               );
             }).toList(),

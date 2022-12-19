@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:raw/app/utils/constants.dart';
+import 'package:raw/ui/views/home/home_view_model.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
-  const HomeHeaderWidget({Key? key}) : super(key: key);
+  const HomeHeaderWidget(this.model, {Key? key}) : super(key: key);
+
+  final HomeViewModel model;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -16,8 +19,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 child: Container(
                   height: 60,
                   width: 60,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300], shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
                   child: const Center(
                       child: Text(
                     'User image',
@@ -66,14 +68,18 @@ class HomeHeaderWidget extends StatelessWidget {
               ),
               const SizedBox(width: 60),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  model.pushNamed('/cart-view');
+                },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
                   color: AppColors().primary,
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  model.pushNamed('/settings-view');
+                },
                 icon: Icon(
                   Icons.settings,
                   color: AppColors().primary,
