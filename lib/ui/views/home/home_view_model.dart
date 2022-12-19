@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:raw/app/core/base_view_model.dart';
 
 class HomeViewModel extends BaseViewModel {
@@ -12,4 +13,7 @@ class HomeViewModel extends BaseViewModel {
 
   int _current = 0;
   int get current => _current;
+
+  final TextEditingController _searchController = TextEditingController();
+  TextEditingController get searchController => _searchController;
 }

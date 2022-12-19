@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
 
-class Constants {
+class AppConstants {
   /// static const String DOG = 'dog';
 }
 
@@ -27,4 +28,20 @@ class AppThemes {
   );
 
   ThemeData darkTheme = ThemeData(brightness: Brightness.dark);
+}
+
+class AppImages {
+  static const String whiteLogo = 'assets/images/logo_white.png';
+  static const String coloredLogo = 'assets/images/logo_colored.png';
+  static const String address = 'assets/images/address.png';
+  static const String helloEmoji = 'assets/images/hello_emoji.png';
+  static const String photographyLogo = 'assets/images/photography.png';
+  static const String videographyLogo = 'assets/images/videography.png';
+  static const String studioLogo = 'assets/images/studio.png';
+  static const String rentLogo = 'assets/images/rent.png';
+}
+
+class AppSvgs {
+  final SvgPicture svgWhiteLogo = SvgPicture.asset('/assets/svgs/white_logo.svg');
+  final SvgPicture svgColoredLogo = SvgPicture.asset('assets/svgs/color_logo.svg');
 }

@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 
 import './login_view_model.dart';
 import '../../../app/utils/constants.dart';
-import '../../../app/utils/images.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -13,14 +12,8 @@ class LoginView extends StatelessWidget {
     TextEditingController textEditingController = TextEditingController();
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(context),
-      onModelReady: (LoginViewModel model) async {
-        await model.init();
-      },
-      builder: (
-        BuildContext context,
-        LoginViewModel model,
-        Widget? child,
-      ) {
+      onModelReady: (LoginViewModel model) async => await model.init(),
+      builder: (BuildContext context, LoginViewModel model, Widget? child) {
         return Scaffold(
           body: SafeArea(
             top: true,
@@ -32,7 +25,7 @@ class LoginView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Image.asset(Images.coloredLogo),
+                      child: Image.asset(AppImages.coloredLogo),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 55.0),
@@ -57,7 +50,8 @@ class LoginView extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Email',
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: AppColors().primary),
+                          borderSide:
+                              BorderSide(width: 1, color: AppColors().primary),
                         ),
                       ),
                     ),
@@ -71,7 +65,8 @@ class LoginView extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Password',
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: AppColors().primary),
+                          borderSide:
+                              BorderSide(width: 1, color: AppColors().primary),
                         ),
                       ),
                     ),
@@ -87,8 +82,10 @@ class LoginView extends StatelessWidget {
                               model.pushNamed('/home-view');
                             },
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              backgroundColor: MaterialStateProperty.all(
+                                  AppColors().primary),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
                                 ),

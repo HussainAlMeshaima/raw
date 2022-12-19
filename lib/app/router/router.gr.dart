@@ -25,7 +25,8 @@ import 'package:raw/ui/views/startup/startup_view.dart' as _i1;
 import 'package:raw/ui/views/videographer/videographer_view.dart' as _i10;
 
 class RawRouter extends _i11.RootStackRouter {
-  RawRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  RawRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i11.PageFactory> pagesMap = {
@@ -109,7 +110,7 @@ class RawRouter extends _i11.RootStackRouter {
         ),
         _i11.RouteConfig(
           BordingRoute.name,
-          path: '/',
+          path: '/bording-view',
         ),
         _i11.RouteConfig(
           LoginRoute.name,
@@ -121,7 +122,7 @@ class RawRouter extends _i11.RootStackRouter {
         ),
         _i11.RouteConfig(
           HomeRoute.name,
-          path: '/home-view',
+          path: '/',
         ),
         _i11.RouteConfig(
           OtpRoute.name,
@@ -164,7 +165,7 @@ class BordingRoute extends _i11.PageRouteInfo<void> {
   const BordingRoute()
       : super(
           BordingRoute.name,
-          path: '/',
+          path: '/bording-view',
         );
 
   static const String name = 'BordingRoute';
@@ -200,7 +201,7 @@ class HomeRoute extends _i11.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
-          path: '/home-view',
+          path: '/',
         );
 
   static const String name = 'HomeRoute';
