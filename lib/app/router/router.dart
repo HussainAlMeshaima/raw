@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:raw/ui/views/admin/admin_view.dart';
 import 'package:raw/ui/views/home/home_view.dart';
 import 'package:raw/ui/views/otp/otp_view.dart';
 import 'package:raw/ui/views/settings/settings_view.dart';
@@ -27,7 +28,8 @@ export './router.gr.dart';
     AdaptiveRoute(page: ProfileView),
     AdaptiveRoute(page: PhotographerView),
     AdaptiveRoute(page: VideographerView),
-    AdaptiveRoute(page: SettingsView, initial: true),
+    AdaptiveRoute(page: SettingsView),
+    AdaptiveRoute(page: AdminView, initial: true),
   ],
 )
 class $RawRouter {}

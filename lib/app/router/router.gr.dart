@@ -11,9 +11,10 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i12;
-import 'package:flutter/material.dart' as _i13;
+import 'package:auto_route/auto_route.dart' as _i13;
+import 'package:flutter/material.dart' as _i14;
 import 'package:raw/ui/views/address/address_view.dart' as _i7;
+import 'package:raw/ui/views/admin/admin_view.dart' as _i12;
 import 'package:raw/ui/views/bording/bording_view.dart' as _i2;
 import 'package:raw/ui/views/home/home_view.dart' as _i5;
 import 'package:raw/ui/views/login/login_view.dart' as _i3;
@@ -25,135 +26,146 @@ import 'package:raw/ui/views/sign_up/sign_up_view.dart' as _i4;
 import 'package:raw/ui/views/startup/startup_view.dart' as _i1;
 import 'package:raw/ui/views/videographer/videographer_view.dart' as _i10;
 
-class RawRouter extends _i12.RootStackRouter {
-  RawRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
+class RawRouter extends _i13.RootStackRouter {
+  RawRouter([_i14.GlobalKey<_i14.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i12.PageFactory> pagesMap = {
+  final Map<String, _i13.PageFactory> pagesMap = {
     StartupRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i1.StartupView(),
         opaque: true,
       );
     },
     BordingRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i2.BordingView(),
         opaque: true,
       );
     },
     LoginRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i3.LoginView(),
         opaque: true,
       );
     },
     SignUpRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i4.SignUpView(),
         opaque: true,
       );
     },
     HomeRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i5.HomeView(),
         opaque: true,
       );
     },
     OtpRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i6.OtpView(),
         opaque: true,
       );
     },
     AddressRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i7.AddressView(),
         opaque: true,
       );
     },
     ProfileRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i8.ProfileView(),
         opaque: true,
       );
     },
     PhotographerRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i9.PhotographerView(),
         opaque: true,
       );
     },
     VideographerRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i10.VideographerView(),
         opaque: true,
       );
     },
     SettingsRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
+      return _i13.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i11.SettingsView(),
+        opaque: true,
+      );
+    },
+    AdminRoute.name: (routeData) {
+      return _i13.AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: _i12.AdminView(),
         opaque: true,
       );
     },
   };
 
   @override
-  List<_i12.RouteConfig> get routes => [
-        _i12.RouteConfig(
+  List<_i13.RouteConfig> get routes => [
+        _i13.RouteConfig(
           StartupRoute.name,
           path: '/startup-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           BordingRoute.name,
           path: '/bording-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           LoginRoute.name,
           path: '/login-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           SignUpRoute.name,
           path: '/sign-up-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           HomeRoute.name,
           path: '/home-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           OtpRoute.name,
           path: '/otp-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           AddressRoute.name,
           path: '/address-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           ProfileRoute.name,
           path: '/profile-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           PhotographerRoute.name,
           path: '/photographer-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           VideographerRoute.name,
           path: '/videographer-view',
         ),
-        _i12.RouteConfig(
+        _i13.RouteConfig(
           SettingsRoute.name,
+          path: '/settings-view',
+        ),
+        _i13.RouteConfig(
+          AdminRoute.name,
           path: '/',
         ),
       ];
@@ -161,7 +173,7 @@ class RawRouter extends _i12.RootStackRouter {
 
 /// generated route for
 /// [_i1.StartupView]
-class StartupRoute extends _i12.PageRouteInfo<void> {
+class StartupRoute extends _i13.PageRouteInfo<void> {
   const StartupRoute()
       : super(
           StartupRoute.name,
@@ -173,7 +185,7 @@ class StartupRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.BordingView]
-class BordingRoute extends _i12.PageRouteInfo<void> {
+class BordingRoute extends _i13.PageRouteInfo<void> {
   const BordingRoute()
       : super(
           BordingRoute.name,
@@ -185,7 +197,7 @@ class BordingRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginView]
-class LoginRoute extends _i12.PageRouteInfo<void> {
+class LoginRoute extends _i13.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -197,7 +209,7 @@ class LoginRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SignUpView]
-class SignUpRoute extends _i12.PageRouteInfo<void> {
+class SignUpRoute extends _i13.PageRouteInfo<void> {
   const SignUpRoute()
       : super(
           SignUpRoute.name,
@@ -209,7 +221,7 @@ class SignUpRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.HomeView]
-class HomeRoute extends _i12.PageRouteInfo<void> {
+class HomeRoute extends _i13.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
@@ -221,7 +233,7 @@ class HomeRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.OtpView]
-class OtpRoute extends _i12.PageRouteInfo<void> {
+class OtpRoute extends _i13.PageRouteInfo<void> {
   const OtpRoute()
       : super(
           OtpRoute.name,
@@ -233,7 +245,7 @@ class OtpRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.AddressView]
-class AddressRoute extends _i12.PageRouteInfo<void> {
+class AddressRoute extends _i13.PageRouteInfo<void> {
   const AddressRoute()
       : super(
           AddressRoute.name,
@@ -245,7 +257,7 @@ class AddressRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.ProfileView]
-class ProfileRoute extends _i12.PageRouteInfo<void> {
+class ProfileRoute extends _i13.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
@@ -257,7 +269,7 @@ class ProfileRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.PhotographerView]
-class PhotographerRoute extends _i12.PageRouteInfo<void> {
+class PhotographerRoute extends _i13.PageRouteInfo<void> {
   const PhotographerRoute()
       : super(
           PhotographerRoute.name,
@@ -269,7 +281,7 @@ class PhotographerRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.VideographerView]
-class VideographerRoute extends _i12.PageRouteInfo<void> {
+class VideographerRoute extends _i13.PageRouteInfo<void> {
   const VideographerRoute()
       : super(
           VideographerRoute.name,
@@ -281,12 +293,24 @@ class VideographerRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.SettingsView]
-class SettingsRoute extends _i12.PageRouteInfo<void> {
+class SettingsRoute extends _i13.PageRouteInfo<void> {
   const SettingsRoute()
       : super(
           SettingsRoute.name,
-          path: '/',
+          path: '/settings-view',
         );
 
   static const String name = 'SettingsRoute';
+}
+
+/// generated route for
+/// [_i12.AdminView]
+class AdminRoute extends _i13.PageRouteInfo<void> {
+  const AdminRoute()
+      : super(
+          AdminRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'AdminRoute';
 }
