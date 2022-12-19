@@ -7,6 +7,7 @@ class HomeHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: [
+          const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

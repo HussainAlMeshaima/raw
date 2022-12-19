@@ -8,6 +8,7 @@ import 'package:raw/ui/views/home/widgets/home_header.dart';
 import 'package:raw/ui/views/home/widgets/home_search_text_field.dart';
 import 'package:raw/ui/views/home/widgets/home_services.dart';
 import 'package:raw/ui/views/home/widgets/home_slider_widget.dart';
+import 'package:raw/ui/views/home/widgets/home_top_rated.dart';
 import 'package:stacked/stacked.dart';
 
 import './home_view_model.dart';
@@ -32,11 +33,11 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
           child: Column(
             children: [
-              const SizedBox(height: 40),
               const HomeHeaderWidget(),
               HomeSearchTextFieldWidget(controller: model.searchController),
               HomeSliderWidget(model),
-              HomeServicesWidget(model)
+              HomeServicesWidget(model),
+              HomeTopRatedWidget(),
             ],
           ),
         ),
