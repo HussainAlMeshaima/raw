@@ -1,9 +1,4 @@
-import 'dart:math';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:raw/app/utils/constants.dart';
-import 'package:raw/ui/views/home/widgets/home_ad_clickable_widget.dart';
 import 'package:raw/ui/views/home/widgets/home_header.dart';
 import 'package:raw/ui/views/home/widgets/home_search_text_field.dart';
 import 'package:raw/ui/views/home/widgets/home_services.dart';

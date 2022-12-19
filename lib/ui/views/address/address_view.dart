@@ -3,7 +3,6 @@ import 'package:raw/app/utils/constants.dart';
 import 'package:stacked/stacked.dart';
 
 import './address_view_model.dart';
-import '../../../app/utils/images.dart';
 
 class AddressView extends StatelessWidget {
   const AddressView({Key? key}) : super(key: key);
@@ -44,7 +43,7 @@ class AddressView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Image.asset(Images.address),
+                  child: Image.asset(AppImages.address),
                 ),
                 SizedBox(
                   height: 30,
