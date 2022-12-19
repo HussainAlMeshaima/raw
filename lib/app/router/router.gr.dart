@@ -25,8 +25,7 @@ import 'package:raw/ui/views/startup/startup_view.dart' as _i1;
 import 'package:raw/ui/views/videographer/videographer_view.dart' as _i10;
 
 class RawRouter extends _i11.RootStackRouter {
-  RawRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  RawRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i11.PageFactory> pagesMap = {
