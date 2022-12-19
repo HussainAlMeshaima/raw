@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import './rent_view_model.dart';
+import './check_out_view_model.dart';
 
-class RentView extends StatelessWidget {
-  const RentView({Key? key}) : super(key: key);
+class CheckOutView extends StatelessWidget {
+  const CheckOutView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<RentViewModel>.reactive(
-      viewModelBuilder: () => RentViewModel(context),
-      onModelReady: (RentViewModel model) async {
+    return ViewModelBuilder<CheckOutViewModel>.reactive(
+      viewModelBuilder: () => CheckOutViewModel(context),
+      onModelReady: (CheckOutViewModel model) async {
         await model.init();
       },
       builder: (
         BuildContext context,
-        RentViewModel model,
+        CheckOutViewModel model,
         Widget? child,
       ) {
         return Scaffold(
           body: Center(
             child: Text(
-              'RentView',
+              'CheckOutView',
             ),
           ),
         );

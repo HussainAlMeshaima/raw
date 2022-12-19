@@ -4,6 +4,8 @@ import 'package:stacked/stacked.dart';
 import './studio_view_model.dart';
 
 class StudioView extends StatelessWidget {
+  const StudioView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StudioViewModel>.reactive(
