@@ -30,48 +30,57 @@ class HomeTopRatedWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
-            child: Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width - 20,
-                height: 100,
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 65,
-                      width: 65,
-                      decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-                      child: const Center(
-                          child: Text(
-                        'User image',
-                        style: TextStyle(fontSize: 10),
-                      )),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Freelancer Name'),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2.0),
-                          child: RatingBarIndicator(
-                            rating: 4.5,
-                            itemBuilder: (context, index) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
+            child: InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 20,
+                  height: 100,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 65,
+                        width: 65,
+                        decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
+                        child: const Center(
+                            child: Text(
+                          'User image',
+                          style: TextStyle(fontSize: 10),
+                        )),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Freelancer Name',
+                            style: TextStyle(
+                              color: AppColors().primary,
+                              fontWeight: FontWeight.bold,
                             ),
-                            itemCount: 5,
-                            itemSize: 19.0,
-                            direction: Axis.horizontal,
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: RatingBarIndicator(
+                              rating: 4.5,
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 19.0,
+                              direction: Axis.horizontal,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xffECECEC)),
                 ),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xffECECEC)),
               ),
             ),
           ),

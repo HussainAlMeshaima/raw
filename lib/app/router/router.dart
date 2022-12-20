@@ -28,10 +28,10 @@ export './router.gr.dart';
   replaceInRouteName: "View,Route",
   routes: <AutoRoute>[
     AdaptiveRoute(page: StartupView),
-    AdaptiveRoute(page: BordingView),
+    AdaptiveRoute(page: BordingView, initial: true),
     AdaptiveRoute(page: LoginView),
     AdaptiveRoute(page: SignUpView),
-    AdaptiveRoute(page: HomeView, initial: true),
+    AdaptiveRoute(page: HomeView),
     AdaptiveRoute(page: OtpView),
     AdaptiveRoute(page: AddressView),
     AdaptiveRoute(page: ProfileView),

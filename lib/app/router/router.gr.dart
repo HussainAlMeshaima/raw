@@ -135,7 +135,7 @@ class RawRouter extends _i22.RootStackRouter {
     AdminRoute.name: (routeData) {
       return _i22.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i14.AdminView(),
+        child: _i14.AdminView(),
         opaque: true,
       );
     },
@@ -198,7 +198,7 @@ class RawRouter extends _i22.RootStackRouter {
         ),
         _i22.RouteConfig(
           BordingRoute.name,
-          path: '/bording-view',
+          path: '/',
         ),
         _i22.RouteConfig(
           LoginRoute.name,
@@ -210,7 +210,7 @@ class RawRouter extends _i22.RootStackRouter {
         ),
         _i22.RouteConfig(
           HomeRoute.name,
-          path: '/',
+          path: '/home-view',
         ),
         _i22.RouteConfig(
           OtpRoute.name,
@@ -297,7 +297,7 @@ class BordingRoute extends _i22.PageRouteInfo<void> {
   const BordingRoute()
       : super(
           BordingRoute.name,
-          path: '/bording-view',
+          path: '/',
         );
 
   static const String name = 'BordingRoute';
@@ -333,7 +333,7 @@ class HomeRoute extends _i22.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
-          path: '/',
+          path: '/home-view',
         );
 
   static const String name = 'HomeRoute';

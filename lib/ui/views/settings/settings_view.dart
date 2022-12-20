@@ -18,31 +18,64 @@ class SettingsView extends StatelessWidget {
         Widget? child,
       ) {
         return Scaffold(
-          body: Center(
-            child: Column(
-              children: [
-                Center(child: Container(height: 100, width: 100, child: AppSvgs().svgColoredLogo)),
-                Container(
-                  height: 40,
-                  width: double.infinity,
-                  child: TextButton(
-                      onPressed: () {
-                        model.pushNamed('/profile-view');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Text(
+              "Settings",
+              style: TextStyle(
+                color: AppColors().primary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            centerTitle: true,
+            leading: IconButton(
+                onPressed: () {
+                  model.goBack();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors().primary,
+                )),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: SafeArea(
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    Center(child: Image.asset(AppImages.coloredLogo)),
+                    SizedBox(
+                      height: 70,
+                    ),
+                    Container(
+                      height: 40,
+                      width: double.infinity,
+                      child: TextButton(
+                          onPressed: () {
+                            model.pushNamed('/profile-view');
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(AppColors().primary),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      child: Text(
-                        'Edit profile',
-                        style: TextStyle(color: Colors.white),
-                      )),
+                          child: Text(
+                            'Edit profile',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );
