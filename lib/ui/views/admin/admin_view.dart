@@ -35,8 +35,7 @@ class AdminView extends StatelessWidget {
               ),
               Center(child: Image.asset('assets/images/logo_colored.png')),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
                 child: Text(
                   'Welcome to the Admin panel! From Here you can Add Freelancers or manage the rent orders',
                   textAlign: TextAlign.center,
@@ -46,19 +45,15 @@ class AdminView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    model.pushNamed('/add-freelancer-view');
+                  },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 15),
-                    decoration: BoxDecoration(
-                        color: AppColors().primary,
-                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(12)),
                     child: const Text(
                       'Add Freelancer',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -66,19 +61,15 @@ class AdminView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    model.pushNamed('/rent-orders-view');
+                  },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 111, vertical: 15),
-                    decoration: BoxDecoration(
-                        color: AppColors().primary,
-                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(horizontal: 111, vertical: 15),
+                    decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(12)),
                     child: const Text(
                       'Rent Orders',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
