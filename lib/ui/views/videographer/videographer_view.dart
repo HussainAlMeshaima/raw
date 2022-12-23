@@ -74,15 +74,13 @@ class VideographerView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Container(
-                    height: 900,
-                    width: 350,
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        freelancerCard("Murtadah Ala'ali", AppImages.videographyLogo, ["Fucking", "Sucking"], 4.5)
-                      ],
-                    ),
-                  ),
+                      height: 900,
+                      width: 350,
+                      child: ListView(
+                        children: [
+                          freelancerCard("Murtadah Ala'ali", AppImages.photographyLogo, ["Fucking", "Sucking"], 4.5, model)
+                        ],
+                      )),
                 )
               ],
             ),
@@ -93,15 +91,14 @@ class VideographerView extends StatelessWidget {
   }
 }
 
-Widget freelancerCard(String name, String image, List<String> skills, double rating) {
+Widget freelancerCard(String name, String image, List<String> skills, double rating, VideographerViewModel model) {
   return InkWell(
     onTap: () {},
     child: Container(
       height: 100,
-      width: 200,
       padding: EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: Color(0xffE7E7E7),
+        color: Color(0xffD9D9D9).withOpacity(0.5),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Center(
@@ -140,32 +137,41 @@ Widget freelancerCard(String name, String image, List<String> skills, double rat
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        skills[0],
-                        style: TextStyle(color: Color(0xff717171)),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Container(
-                          height: 15,
-                          width: 1,
-                          color: Color(0xffCACACA),
+                  child: skills.length > 1
+                      ? Row(
+                          children: [
+                            Text(
+                              skills[0],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                height: 15,
+                                width: 1,
+                                color: Color(0xffCACACA),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              skills[1],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Text(
+                              skills[0],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        skills[1],
-                        style: TextStyle(color: Color(0xff717171)),
-                      ),
-                    ],
-                  ),
                 ),
                 RatingBarIndicator(
                   rating: rating,
@@ -211,6 +217,47 @@ Widget filterItem(String title, VideographerViewModel model, int index) {
           ),
         ),
       ),
+    ),
+  );
+}
+
+Widget freelancerInfoCard(String image, type, data) {
+  return Container(
+    height: 200,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.asset(image),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Text(
+                type,
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                data,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors().primary),
+              ),
+            ),
+          ],
+        )
+      ],
     ),
   );
 }

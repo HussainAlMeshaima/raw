@@ -39,6 +39,9 @@ class AppImages {
   static const String videographyLogo = 'assets/images/videography.png';
   static const String studioLogo = 'assets/images/studio.png';
   static const String rentLogo = 'assets/images/rent.png';
+  static const String customersLogo = 'assets/images/customers.png';
+  static const String ratingLogo = 'assets/images/rating_star.png';
+  static const String experienceLogo = 'assets/images/experience.png';
 }
 
 class AppSvgs {

@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:raw/app/app.dart';
 import 'package:raw/app/locator/locator.dart';
 import 'package:raw/app/services/router_service.dart';
 import 'package:raw/app/utils/constants.dart';
@@ -24,7 +23,6 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: 'Aaab',
       theme: AppThemes().lightTheme,
-      darkTheme: AppThemes().darkTheme,
       debugShowCheckedModeBanner: false,
       routerDelegate: routerService.router.delegate(),
       routeInformationParser: routerService.router.defaultRouteParser(),

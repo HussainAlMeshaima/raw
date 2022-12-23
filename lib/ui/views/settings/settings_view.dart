@@ -40,40 +40,65 @@ class SettingsView extends StatelessWidget {
                   color: AppColors().primary,
                 )),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: SafeArea(
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Center(child: Image.asset(AppImages.coloredLogo)),
-                    SizedBox(
-                      height: 70,
-                    ),
-                    Container(
-                      height: 40,
-                      width: double.infinity,
-                      child: TextButton(
-                          onPressed: () {
-                            model.pushNamed('/profile-view');
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: SafeArea(
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Center(child: Image.asset(AppImages.coloredLogo)),
+                      SizedBox(
+                        height: 70,
+                      ),
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        child: TextButton(
+                            onPressed: () {
+                              model.pushNamed('/profile-view');
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(AppColors().primary),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
                               ),
                             ),
-                          ),
-                          child: Text(
-                            'Edit profile',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                  ],
+                            child: Text(
+                              'Edit profile',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        child: TextButton(
+                            onPressed: () {
+                              model.pushNamed('/profile-view');
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

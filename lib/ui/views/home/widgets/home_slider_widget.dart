@@ -17,7 +17,7 @@ class HomeSliderWidget extends StatelessWidget {
       width: 400,
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 7),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(30),
         color: AppColors().primary,
       ),
     ),
@@ -47,8 +47,8 @@ class HomeSliderWidget extends StatelessWidget {
             children: list.asMap().entries.map((entry) {
               return GestureDetector(
                 child: Container(
-                  width: 12.0,
-                  height: 12.0,
+                  width: model.current == entry.key ? 9.0 : 6.0,
+                  height: model.current == entry.key ? 9.0 : 6.0,
                   margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                   decoration: BoxDecoration(shape: BoxShape.circle, color: model.current == entry.key ? AppColors().secondary : Colors.grey),
                 ),

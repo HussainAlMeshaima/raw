@@ -21,10 +21,8 @@ class HomeAdClickableWidget extends StatelessWidget {
         width: 400,
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 7),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          image: adImage.isNotEmpty
-              ? DecorationImage(image: AssetImage(adImage))
-              : null,
+          borderRadius: BorderRadius.circular(30),
+          image: adImage.isNotEmpty ? DecorationImage(image: AssetImage(adImage)) : null,
           color: adImage.isEmpty ? AppColors().primary : null,
         ),
         child: Column(
@@ -53,7 +51,7 @@ class HomeAdClickableWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             SizedBox(
-              height: 40,
+              height: 30,
               width: 120,
               child: TextButton(
                 onPressed: () => {
@@ -72,7 +70,7 @@ class HomeAdClickableWidget extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors().primary,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 12,
                   ),
                 ),
               ),

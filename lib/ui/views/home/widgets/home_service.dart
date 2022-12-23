@@ -28,7 +28,7 @@ class HomeServiceWidget extends StatelessWidget {
               width: 70,
               decoration: BoxDecoration(
                 color: const Color(0xffECECEC),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(25),
               ),
               child: Center(
                 child: Image.asset(
@@ -42,8 +42,7 @@ class HomeServiceWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 label,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
               ),
             )
           ],

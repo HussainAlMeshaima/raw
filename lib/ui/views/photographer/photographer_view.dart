@@ -78,14 +78,13 @@ class PhotographerView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
                   child: Container(
                     height: 900,
-                    width: 350,
                     child: ListView(
                       scrollDirection: Axis.vertical,
                       children: [
-                        freelancerCard("Murtadah Ala'ali", AppImages.photographyLogo, ["Fucking", "Sucking"], 4.5)
+                        freelancerCard("Murtadah Ala'ali", AppImages.photographyLogo, ["Fucking", "Sucking"], 4.5, model)
                       ],
                     ),
                   ),
@@ -99,15 +98,17 @@ class PhotographerView extends StatelessWidget {
   }
 }
 
-Widget freelancerCard(String name, String image, List<String> skills, double rating) {
+Widget freelancerCard(String name, String image, List<String> skills, double rating, PhotographerViewModel model) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      //TODO FREELANCER INFO
+      model.pushNamed('/booking-view');
+    },
     child: Container(
       height: 100,
-      width: 200,
       padding: EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: Color(0xffE7E7E7),
+        color: Color(0xffD9D9D9).withOpacity(0.5),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Center(
@@ -146,32 +147,41 @@ Widget freelancerCard(String name, String image, List<String> skills, double rat
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        skills[0],
-                        style: TextStyle(color: Color(0xff717171)),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Container(
-                          height: 15,
-                          width: 1,
-                          color: Color(0xffCACACA),
+                  child: skills.length > 1
+                      ? Row(
+                          children: [
+                            Text(
+                              skills[0],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                height: 15,
+                                width: 1,
+                                color: Color(0xffCACACA),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              skills[1],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Text(
+                              skills[0],
+                              style: TextStyle(color: Color(0xff717171)),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        skills[1],
-                        style: TextStyle(color: Color(0xff717171)),
-                      ),
-                    ],
-                  ),
                 ),
                 RatingBarIndicator(
                   rating: rating,
