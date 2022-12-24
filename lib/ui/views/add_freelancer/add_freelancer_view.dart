@@ -25,7 +25,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
             elevation: 0,
             centerTitle: true,
             title: Text(
-              'Freelancer',
+              'Add Freelancer',
               style: TextStyle(
                 color: AppColors().primary,
                 fontSize: 20,
@@ -204,6 +204,52 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                     ),
                   ),
                   checkBox(model),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 13.0),
+                    child: InkWell(
+                      onTap: () {
+                        _showAddPackageDialog(context);
+                      },
+                      child: Container(
+                        width: 200,
+                        height: 40,
+                        decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: const Text(
+                            'Add Freelancer',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: packageCard(),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 55,
+                        width: double.infinity,
+                        decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(30)),
+                        child: Center(
+                          child: const Text(
+                            'Add',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -257,5 +303,133 @@ Widget checkBox(AddFreelancerViewModel model) {
         },
       ),
     ],
+  );
+}
+
+void _showAddPackageDialog(BuildContext context) {
+  final _formKey = GlobalKey<FormState>();
+  String _packageName;
+  String _price;
+  String _packageDescription;
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+          title: Text('Add Package'),
+          actions: [
+            TextButton(
+              child: Text('Add'),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  // Add code here to add the package to your list or database
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          content: Builder(builder: (context) {
+            return Container(
+              height: 200,
+              width: double.infinity,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Package Name'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a package name';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        if (value != null) {
+                          _packageName = value;
+                        }
+                      },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Price'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a price';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        if (value != null) {
+                          _price = value;
+                        }
+                      },
+                    ),
+                    TextFormField(
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        labelText: 'Package Description',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a package description';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        if (value != null) {
+                          _packageDescription = value;
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }));
+    },
+  );
+}
+
+Widget packageCard() {
+  return Container(
+    height: 100,
+    width: double.infinity,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      border: Border.all(color: Color(0xffDDDDDD), width: 0.8),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Package Title'),
+              Text('Package Description'),
+              Text('Package Price'),
+            ],
+          ),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.remove_circle,
+                color: AppColors().secondary,
+              )),
+        ],
+      ),
+    ),
   );
 }
