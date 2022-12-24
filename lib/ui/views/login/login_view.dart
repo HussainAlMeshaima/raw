@@ -56,6 +56,7 @@ class LoginView extends StatelessWidget {
                         showCursor: true,
                         controller: model.passwordTextEditingController,
                         cursorColor: AppColors().primary,
+                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           enabledBorder: UnderlineInputBorder(
