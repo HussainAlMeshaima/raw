@@ -4,10 +4,11 @@ class VideographerViewModel extends BaseViewModel {
   VideographerViewModel(context) : super(context);
   Future<void> init() async {}
   void toggleIsSelected({bool? value}) {
-    if (value != null)
+    if (value != null) {
       _isSelected = value;
-    else
+    } else {
       _isSelected = !_isSelected;
+    }
 
     notifyListeners();
   }

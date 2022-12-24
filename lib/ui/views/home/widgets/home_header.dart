@@ -12,78 +12,104 @@ class HomeHeaderWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 25.0),
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-                  child: const Center(
-                      child: Text(
-                    'User image',
-                    style: TextStyle(fontSize: 10),
-                  )),
-                ),
-              ),
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 3.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(top: 3.0),
-                            child: Text(
-                              'WELCOME',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15,
+              model.isLoading
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 100.0),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors().primary,
+                        ),
+                      ),
+                    )
+                  : Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 25.0),
+                          child: model.user?.image != null
+                              ? Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(model.user!.image!),
+                                        fit: BoxFit.fill),
+                                    shape: BoxShape.circle,
+                                  ),
+                                )
+                              : Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(.5),
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                        ),
+                        Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 3.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 3.0),
+                                      child: Text(
+                                        'WELCOME',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 6),
+                                    Image.asset(
+                                      AppImages.helloEmoji,
+                                      height: 15,
+                                      width: 15,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                              Text(
+                                'Murtadha Alaali',
+                                style: TextStyle(
+                                  color: AppColors().primary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 6),
-                          Image.asset(
-                            AppImages.helloEmoji,
-                            height: 15,
-                            width: 15,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Murtadha Alaali',
-                      style: TextStyle(
-                        color: AppColors().primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+              Row(
+                children: [
+                  const SizedBox(width: 60),
+                  IconButton(
+                    onPressed: () {
+                      model.pushNamed('/cart-view');
+                    },
+                    icon: Icon(
+                      Icons.shopping_cart_outlined,
+                      color: AppColors().primary,
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 60),
-              IconButton(
-                onPressed: () {
-                  model.pushNamed('/cart-view');
-                },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: AppColors().primary,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  model.pushNamed('/settings-view');
-                },
-                icon: Icon(
-                  Icons.settings,
-                  color: AppColors().primary,
-                ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      model.pushNamed('/settings-view');
+                    },
+                    icon: Icon(
+                      Icons.settings,
+                      color: AppColors().primary,
+                    ),
+                  )
+                ],
               )
             ],
           ),
