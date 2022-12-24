@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:raw/app/locator/locator.dart';
 import 'package:raw/app/services/router_service.dart';
@@ -14,10 +15,13 @@ abstract class BaseViewModel extends stacked.BaseViewModel {
   final RouterService _routerService = locator<RouterService>();
 
   // Focus
-  void removeFocus() => FocusManager.instance.primaryFocus?.unfocus();
+  void unfocus() => FocusManager.instance.primaryFocus?.unfocus();
 
   // Navigation
   void goBack() => _routerService.router.pop();
+  void canPop(String path) => _routerService.router.canPop();
+  void navigateBack() => _routerService.router.navigateBack();
+  void push(PageRouteInfo page) => _routerService.router.push(page);
   void pushNamed(String path) => _routerService.router.pushNamed(path);
   void replaceNamed(String path) => _routerService.router.replaceNamed(path);
 
@@ -26,7 +30,7 @@ abstract class BaseViewModel extends stacked.BaseViewModel {
     ScaffoldMessenger.of(_context).showSnackBar(SnackBar(
       backgroundColor: AppColors().primary,
       duration: duration ?? const Duration(seconds: 1),
-      content: Text(message, style: TextStyle(color: AppColors().textColor)),
+      content: Text(message, style: TextStyle(color: AppColors().backgroundColor)),
     ));
   }
 }

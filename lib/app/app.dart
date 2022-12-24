@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
     import 'package:raw/app/services/router_service.dart';
 
 class RawApp extends StatelessWidget {
+  const RawApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final RouterService _routerService = locator<RouterService>();

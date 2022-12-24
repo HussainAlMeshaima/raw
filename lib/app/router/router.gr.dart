@@ -84,9 +84,13 @@ class RawRouter extends _i22.RootStackRouter {
       );
     },
     AddressRoute.name: (routeData) {
+      final args = routeData.argsAs<AddressRouteArgs>();
       return _i22.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i7.AddressView(),
+        child: _i7.AddressView(
+          key: args.key,
+          data: args.data,
+        ),
         opaque: true,
       );
     },
@@ -353,14 +357,36 @@ class OtpRoute extends _i22.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.AddressView]
-class AddressRoute extends _i22.PageRouteInfo<void> {
-  const AddressRoute()
-      : super(
+class AddressRoute extends _i22.PageRouteInfo<AddressRouteArgs> {
+  AddressRoute({
+    _i23.Key? key,
+    required dynamic data,
+  }) : super(
           AddressRoute.name,
           path: '/address-view',
+          args: AddressRouteArgs(
+            key: key,
+            data: data,
+          ),
         );
 
   static const String name = 'AddressRoute';
+}
+
+class AddressRouteArgs {
+  const AddressRouteArgs({
+    this.key,
+    required this.data,
+  });
+
+  final _i23.Key? key;
+
+  final dynamic data;
+
+  @override
+  String toString() {
+    return 'AddressRouteArgs{key: $key, data: $data}';
+  }
 }
 
 /// generated route for
