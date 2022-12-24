@@ -20,6 +20,9 @@ class HomeSearchTextFieldWidget extends StatelessWidget {
               height: 43,
               child: Center(
                 child: TextField(
+                  onSubmitted: (String? value) {
+                    print(value);
+                  },
                   cursorColor: AppColors().primary,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(

@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:raw/app/core/base_view_model.dart';
 import 'package:raw/app/locator/locator.dart';
+import 'package:raw/app/models/User.dart';
 import 'package:raw/app/services/AuthService.dart';
 import 'package:raw/app/services/CloudStorageService.dart';
 import 'package:raw/app/services/UserService.dart';
 
-import '../../../app/models/user.dart';
 import '../../../app/router/router.gr.dart';
 
 class SignUpViewModel extends BaseViewModel {

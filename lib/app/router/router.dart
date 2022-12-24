@@ -5,6 +5,7 @@ import 'package:raw/ui/views/freelance_panel/freelance_panel_view.dart';
 import 'package:raw/ui/views/home/home_view.dart';
 import 'package:raw/ui/views/otp/otp_view.dart';
 import 'package:raw/ui/views/rent_orders/rent_orders_view.dart';
+import 'package:raw/ui/views/search/search_view.dart';
 import 'package:raw/ui/views/startup/startup_view.dart';
 import 'package:raw/ui/views/studio/studio_view.dart';
 
@@ -48,6 +49,7 @@ export './router.gr.dart';
     AdaptiveRoute(page: AddFreelancerView),
     AdaptiveRoute(page: RentOrdersView),
     AdaptiveRoute(page: FreelancePanelView),
+    AdaptiveRoute(page: SearchView),
   ],
 )
 class $RawRouter {}

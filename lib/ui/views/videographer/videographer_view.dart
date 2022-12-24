@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:raw/app/router/router.dart';
 import 'package:stacked/stacked.dart';
 
 import './videographer_view_model.dart';
@@ -13,7 +14,8 @@ class VideographerView extends StatelessWidget {
     return ViewModelBuilder<VideographerViewModel>.reactive(
       viewModelBuilder: () => VideographerViewModel(context),
       onModelReady: (VideographerViewModel model) async => await model.init(),
-      builder: (BuildContext context, VideographerViewModel model, Widget? child) {
+      builder:
+          (BuildContext context, VideographerViewModel model, Widget? child) {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -38,9 +40,7 @@ class VideographerView extends StatelessWidget {
                 )),
             actions: [
               IconButton(
-                onPressed: () {
-                  //TODO
-                },
+                onPressed: () => model.pushNamed(SearchRoute().path),
                 icon: Icon(
                   Icons.search,
                   color: AppColors().primary,
@@ -78,7 +78,12 @@ class VideographerView extends StatelessWidget {
                       width: 350,
                       child: ListView(
                         children: [
-                          freelancerCard("Murtadah Ala'ali", AppImages.photographyLogo, ["Fucking", "Sucking"], 4.5, model)
+                          freelancerCard(
+                              "Murtadah Ala'ali",
+                              AppImages.photographyLogo,
+                              ["Fucking", "Sucking"],
+                              4.5,
+                              model)
                         ],
                       )),
                 )
@@ -91,7 +96,8 @@ class VideographerView extends StatelessWidget {
   }
 }
 
-Widget freelancerCard(String name, String image, List<String> skills, double rating, VideographerViewModel model) {
+Widget freelancerCard(String name, String image, List<String> skills,
+    double rating, VideographerViewModel model) {
   return InkWell(
     onTap: () {},
     child: Container(
@@ -125,7 +131,10 @@ Widget freelancerCard(String name, String image, List<String> skills, double rat
               children: [
                 Text(
                   name,
-                  style: TextStyle(color: AppColors().primary, fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: AppColors().primary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
@@ -148,7 +157,8 @@ Widget freelancerCard(String name, String image, List<String> skills, double rat
                               width: 3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Container(
                                 height: 15,
                                 width: 1,
@@ -206,12 +216,19 @@ Widget filterItem(String title, VideographerViewModel model, int index) {
       child: Container(
         height: 10,
         width: 80,
-        decoration: BoxDecoration(color: isSelected == true && _index == index ? AppColors().primary : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: AppColors().primary)),
+        decoration: BoxDecoration(
+            color: isSelected == true && _index == index
+                ? AppColors().primary
+                : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors().primary)),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-              color: isSelected == true && _index == index ? Colors.white : AppColors().primary,
+              color: isSelected == true && _index == index
+                  ? Colors.white
+                  : AppColors().primary,
               fontSize: 12,
             ),
           ),
@@ -252,7 +269,10 @@ Widget freelancerInfoCard(String image, type, data) {
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
                 data,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors().primary),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors().primary),
               ),
             ),
           ],

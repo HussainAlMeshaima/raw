@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:raw/app/router/router.gr.dart';
 import 'package:stacked/stacked.dart';
 
 import './photographer_view_model.dart';
@@ -44,9 +45,7 @@ class PhotographerView extends StatelessWidget {
                 )),
             actions: [
               IconButton(
-                onPressed: () {
-                  //TODO
-                },
+                onPressed: () => model.pushNamed(SearchRoute().path),
                 icon: Icon(
                   Icons.search,
                   color: AppColors().primary,
