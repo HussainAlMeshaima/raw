@@ -42,6 +42,7 @@ class AppImages {
   static const String customersLogo = 'assets/images/customers.png';
   static const String ratingLogo = 'assets/images/rating_star.png';
   static const String experienceLogo = 'assets/images/experience.png';
+  static const String searchIcon = 'assets/images/search_icon.png';
 }
 
 class AppSvgs {

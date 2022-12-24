@@ -9,7 +9,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(context),
       onModelReady: (LoginViewModel model) async => await model.init(),
@@ -25,9 +24,7 @@ class LoginView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(
-                        child: Image.asset(AppImages.coloredLogo),
-                      ),
+                      Center(child: Image.asset(AppImages.coloredLogo)),
                       Padding(
                         padding: const EdgeInsets.only(top: 55.0),
                         child: Center(
@@ -41,118 +38,105 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 30),
                       TextField(
                         showCursor: true,
-                        controller: textEditingController,
+                        controller: model.emailTextEditingController,
                         cursorColor: AppColors().primary,
                         decoration: InputDecoration(
                           hintText: 'Email',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: AppColors().primary),
+                            borderSide: BorderSide(
+                                width: 1, color: AppColors().primary),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 30),
                       TextField(
                         showCursor: true,
-                        controller: textEditingController,
+                        controller: model.passwordTextEditingController,
                         cursorColor: AppColors().primary,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: AppColors().primary),
+                            borderSide: BorderSide(
+                                width: 1, color: AppColors().primary),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      const SizedBox(height: 40),
                       Center(
-                        child: Container(
+                        child: SizedBox(
                           height: 40,
                           width: double.infinity,
                           child: TextButton(
-                              onPressed: () {
-                                model.pushNamed('/freelance-panel-view');
-                              },
+                              onPressed: () => model.doLogin(),
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                backgroundColor: MaterialStateProperty.all(
+                                    AppColors().primary),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Login',
                                 style: TextStyle(color: Colors.white),
                               )),
                         ),
                       ),
-                      SizedBox(
-                        height: 35,
-                      ),
+                      const SizedBox(height: 35),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(right: 8.0),
+                      //       child: Container(
+                      //         height: 1,
+                      //         width: 100,
+                      //         color: Colors.grey,
+                      //       ),
+                      //     ),
+                      //     const Text('Or login with'),
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(left: 8.0),
+                      //       child: Container(
+                      //         height: 1,
+                      //         width: 100,
+                      //         color: Colors.grey,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 30),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     const Text('Google logo here'),
+                      //     const SizedBox(width: 15),
+                      //     Text(
+                      //       'Google',
+                      //       style: TextStyle(color: AppColors().textColor),
+                      //     )
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Container(
-                              height: 1,
-                              width: 100,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text('Or login with'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Container(
-                              height: 1,
-                              width: 100,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Google logo here'),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Google',
-                            style: TextStyle(color: AppColors().textColor),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('You Don’t have an account ?'),
+                          const Text('You Don’t have an account ?'),
                           TextButton(
-                              onPressed: () {
-                                model.pushNamed('/sign-up-view');
-                              },
-                              child: Text(
-                                'Signup',
-                                style: TextStyle(
-                                  color: AppColors().primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ))
+                            onPressed: () => model.pushNamed('/sign-up-view'),
+                            child: Text(
+                              'Sign up',
+                              style: TextStyle(
+                                color: AppColors().primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
