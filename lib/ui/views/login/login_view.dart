@@ -78,7 +78,7 @@ class LoginView extends StatelessWidget {
                           width: double.infinity,
                           child: TextButton(
                               onPressed: () {
-                                model.pushNamed('/freelance-panel-view');
+                                model.pushNamed('/admin-view');
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(AppColors().primary),
