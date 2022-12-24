@@ -16,23 +16,24 @@ class AdminView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
+            centerTitle: true,
             backgroundColor: Colors.transparent,
+            title: Text(
+              'Freelancer Panel',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors().primary),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.logout_rounded,
+                    color: AppColors().primary,
+                  ))
+            ],
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    'Admin Panel',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
               Center(child: Image.asset('assets/images/logo_colored.png')),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),

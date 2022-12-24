@@ -16,11 +16,47 @@ class FreelancePanelView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
+            centerTitle: true,
             backgroundColor: Colors.transparent,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'WELCOME!',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: AppColors().primary),
+                    ),
+                    SizedBox(width: 6),
+                    Image.asset(
+                      AppImages.helloEmoji,
+                      height: 15,
+                      width: 15,
+                    ),
+                  ],
+                ),
+                Text(
+                  'Freelancer_name',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors().primary),
+                ),
+              ],
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.logout_rounded,
+                    color: AppColors().primary,
+                  ))
+            ],
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 20,
+              ),
+              Center(child: Image.asset('assets/images/logo_colored.png')),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -33,9 +69,8 @@ class FreelancePanelView extends StatelessWidget {
                   ),
                 ),
               ),
-              Center(child: Image.asset('assets/images/logo_colored.png')),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: Text(
                   'Welcome to the Freelancer panel! From Here you can manage your booking appointments',
                   textAlign: TextAlign.center,
@@ -43,7 +78,7 @@ class FreelancePanelView extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 30),
                 child: InkWell(
                   onTap: () {
                     model.pushNamed('/appointments-view');
