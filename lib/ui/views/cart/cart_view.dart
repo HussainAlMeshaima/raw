@@ -55,10 +55,7 @@ class CartView extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           'Done',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                       ),
                     )
@@ -88,8 +85,7 @@ class CartView extends StatelessWidget {
                             child: const Center(
                                 child: Text(
                               'Checkout',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
+                              style: TextStyle(color: Colors.white, fontSize: 15),
                             )),
                           ),
                         )
@@ -102,25 +98,38 @@ class CartView extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Color(0xffF0F4F9),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
                   ),
                   child: model.packages.isEmpty
-                      ? const Center(
-                          child: Text('No packages added.'),
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.add_shopping_cart_outlined,
+                                color: Color(0xffFCA311),
+                                size: 80,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'No items added!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                       : Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, left: 10, right: 10),
+                          padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
                           child: SingleChildScrollView(
                             child: Container(
-                              constraints: BoxConstraints(
-                                  minHeight:
-                                      MediaQuery.of(context).size.height - 160),
+                              constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height - 160),
                               child: Column(
-                                children: List.generate(model.packages.length,
-                                    (int index) {
+                                children: List.generate(model.packages.length, (int index) {
                                   return cartProductWidget(
                                     model,
                                     model.packages[index],
@@ -208,10 +217,7 @@ Widget cartProductWidget(CartViewModel model, Package package) {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     package.count.toString(),
-                    style: TextStyle(
-                        color: AppColors().primary,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
+                    style: TextStyle(color: AppColors().primary, fontWeight: FontWeight.w500, fontSize: 15),
                   ),
                 ),
                 GestureDetector(

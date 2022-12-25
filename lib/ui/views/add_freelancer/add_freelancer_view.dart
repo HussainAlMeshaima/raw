@@ -19,8 +19,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
     return ViewModelBuilder<AddFreelancerViewModel>.reactive(
       viewModelBuilder: () => AddFreelancerViewModel(context),
       onModelReady: (AddFreelancerViewModel model) async => await model.init(),
-      builder:
-          (BuildContext context, AddFreelancerViewModel model, Widget? child) {
+      builder: (BuildContext context, AddFreelancerViewModel model, Widget? child) {
         return GestureDetector(
           onTap: () => model.unfocus(),
           child: Scaffold(
@@ -88,8 +87,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                               decoration: BoxDecoration(
                                 image: model.userImage != null
                                     ? DecorationImage(
-                                        image: FileImage(
-                                            File(model.userImage!.path)),
+                                        image: FileImage(File(model.userImage!.path)),
                                         fit: BoxFit.cover,
                                       )
                                     : null,
@@ -126,8 +124,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                               filled: true,
                               fillColor: const Color(0xffF6F6F6),
                               hintText: "Name",
-                              hintStyle:
-                                  const TextStyle(color: Color(0xff908E8E)),
+                              hintStyle: const TextStyle(color: Color(0xff908E8E)),
                               contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
@@ -137,8 +134,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                               ),
                             ),
                           ),
@@ -159,8 +155,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                               filled: true,
                               fillColor: const Color(0xffF6F6F6),
                               hintText: "Email",
-                              hintStyle:
-                                  const TextStyle(color: Color(0xff908E8E)),
+                              hintStyle: const TextStyle(color: Color(0xff908E8E)),
                               contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
@@ -170,8 +165,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                               ),
                             ),
                           ),
@@ -192,8 +186,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                               filled: true,
                               fillColor: const Color(0xffF6F6F6),
                               hintText: "Phone number",
-                              hintStyle:
-                                  const TextStyle(color: Color(0xff908E8E)),
+                              hintStyle: const TextStyle(color: Color(0xff908E8E)),
                               contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
@@ -203,8 +196,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                               ),
                             ),
                           ),
@@ -226,8 +218,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                             filled: true,
                             fillColor: const Color(0xffF6F6F6),
                             hintText: "Description",
-                            hintStyle:
-                                const TextStyle(color: Color(0xff908E8E)),
+                            hintStyle: const TextStyle(color: Color(0xff908E8E)),
                             contentPadding: const EdgeInsets.only(
                               bottom: 43 / 2,
                               left: 7, // HERE THE IMPORTANT PART
@@ -237,8 +228,7 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                                 width: 0,
                                 style: BorderStyle.none,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
                             ),
                           ),
                         ),
@@ -261,16 +251,11 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                         child: Container(
                           width: 200,
                           height: 40,
-                          decoration: BoxDecoration(
-                              color: AppColors().primary,
-                              borderRadius: BorderRadius.circular(12)),
+                          decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(12)),
                           child: Center(
                             child: const Text(
                               'Add Freelancer',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -293,16 +278,11 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
                         child: Container(
                           height: 55,
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: AppColors().primary,
-                              borderRadius: BorderRadius.circular(30)),
+                          decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(30)),
                           child: Center(
                             child: const Text(
                               'Add',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -384,7 +364,7 @@ void _showAddPackageDialog(BuildContext context) {
           ],
           content: Builder(builder: (context) {
             return Container(
-              height: 200,
+              height: 300,
               width: double.infinity,
               child: Form(
                 key: _formKey,

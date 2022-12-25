@@ -3,7 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raw/app/models/Freelancer.dart';
 import 'package:raw/app/models/Package.dart';
 import 'package:stacked/stacked.dart';
-import 'package:flutter/material.dart';
 
 import './booking_view_model.dart';
 import '../../../app/utils/constants.dart';
@@ -37,16 +36,9 @@ class BookingView extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          freelancerInfoCard(
-                              AppImages.experienceLogo,
-                              'Experience',
-                              '${model.freelancer.yearsExperience} Years'),
-                          freelancerInfoCard(
-                              AppImages.customersLogo,
-                              'Customers',
-                              model.freelancer.numberOfCustomers.toString()),
-                          freelancerInfoCard(AppImages.ratingLogo, 'Rating',
-                              model.freelancer.rating.toString()),
+                          freelancerInfoCard(AppImages.experienceLogo, 'Experience', '${model.freelancer.yearsExperience} Years'),
+                          freelancerInfoCard(AppImages.customersLogo, 'Customers', model.freelancer.numberOfCustomers.toString()),
+                          freelancerInfoCard(AppImages.ratingLogo, 'Rating', model.freelancer.rating.toString()),
                         ],
                       ),
                     ),
@@ -55,7 +47,7 @@ class BookingView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          freelancerPackagesCard(model.freelancer.packages)
+                          freelancerPackagesCard(model.freelancer.packages, model),
                         ],
                       ),
                     ),
@@ -159,10 +151,7 @@ Widget freelancerCard({required BookingViewModel model}) {
             children: [
               Text(
                 model.freelancer.user?.name ?? '-',
-                style: TextStyle(
-                    color: AppColors().primary,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: AppColors().primary, fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
@@ -178,15 +167,12 @@ Widget freelancerCard({required BookingViewModel model}) {
                     ? Row(
                         children: [
                           Text(
-                            model.freelancer.freelancerTypes?[0].name
-                                    .toLowerCase() ??
-                                '-',
+                            model.freelancer.freelancerTypes?[0].name.toLowerCase() ?? '-',
                             style: const TextStyle(color: Color(0xff717171)),
                           ),
                           const SizedBox(width: 3),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Container(
                               height: 15,
                               width: 1,
@@ -195,9 +181,7 @@ Widget freelancerCard({required BookingViewModel model}) {
                           ),
                           const SizedBox(width: 3),
                           Text(
-                            model.freelancer.freelancerTypes?[1].name
-                                    .toLowerCase() ??
-                                '-',
+                            model.freelancer.freelancerTypes?[1].name.toLowerCase() ?? '-',
                             style: const TextStyle(color: Color(0xff717171)),
                           ),
                         ],
@@ -205,9 +189,7 @@ Widget freelancerCard({required BookingViewModel model}) {
                     : Row(
                         children: [
                           Text(
-                            model.freelancer.freelancerTypes?[0].name
-                                    .toLowerCase() ??
-                                '-',
+                            model.freelancer.freelancerTypes?[0].name.toLowerCase() ?? '-',
                             style: const TextStyle(color: Color(0xff717171)),
                           ),
                         ],
@@ -231,40 +213,40 @@ Widget freelancerCard({required BookingViewModel model}) {
   );
 }
 
-Widget filterItem(String title, BookingViewModel model, int index) {
-  int _index = 0;
-  bool isSelected = model.isSelected;
-  return InkWell(
-    onTap: () {
-      _index = index;
-      model.toggleIsSelected();
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Container(
-        height: 10,
-        width: 80,
-        decoration: BoxDecoration(
-            color: isSelected == true && _index == index
-                ? AppColors().primary
-                : Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors().primary)),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: isSelected == true && _index == index
-                  ? Colors.white
-                  : AppColors().primary,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-}
+// Widget filterItem(String title, BookingViewModel model, int index) {
+//   int _index = 0;
+//
+//   return InkWell(
+//     onTap: () {
+//       _index = index;
+//       model.toggleIsSelected();
+//     },
+//     child: Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//       child: Container(
+//         height: 10,
+//         width: 80,
+//         decoration: BoxDecoration(
+//             color: isSelected == true && _index == index
+//                 ? AppColors().primary
+//                 : Colors.white,
+//             borderRadius: BorderRadius.circular(10),
+//             border: Border.all(color: AppColors().primary)),
+//         child: Center(
+//           child: Text(
+//             title,
+//             style: TextStyle(
+//               color: isSelected == true && _index == index
+//                   ? Colors.white
+//                   : AppColors().primary,
+//               fontSize: 12,
+//             ),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 Widget freelancerInfoCard(String image, type, data) {
   return Container(
@@ -297,10 +279,7 @@ Widget freelancerInfoCard(String image, type, data) {
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
                 data,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors().primary),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors().primary),
               ),
             ),
           ],
@@ -310,7 +289,7 @@ Widget freelancerInfoCard(String image, type, data) {
   );
 }
 
-Widget freelancerPackagesCard(List<Package>? packages) {
+Widget freelancerPackagesCard(List<Package>? packages, BookingViewModel model) {
   if (packages == null) return Container();
   return SizedBox(
     height: 140,
@@ -322,29 +301,34 @@ Widget freelancerPackagesCard(List<Package>? packages) {
           Package package = packages[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 170,
-              width: 140,
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xffC9C9C9), width: 1.5),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(package.name ?? '-'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(package.description ?? '-'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(package.price.toString()),
-                  )
-                ],
+            child: InkWell(
+              onTap: () {
+                model.toggleIsSelected();
+              },
+              child: Container(
+                height: 170,
+                width: 140,
+                decoration: BoxDecoration(
+                  border: Border.all(color: model.isSelected == true && package.count == index ? AppColors().secondary : const Color(0xffC9C9C9), width: model.isSelected == true && package.count == index ? 3 : 1.5),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(package.name ?? '-'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(package.description ?? '-'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(package.price.toString()),
+                    )
+                  ],
+                ),
               ),
             ),
           );
@@ -378,8 +362,7 @@ Widget aboutFreelancerCard(BookingViewModel model) {
 }
 
 Widget freelancerPortfolioCard(BookingViewModel model) {
-  List<dynamic> images = List<dynamic>.generate(
-      model.freelancer.portfolios?.length ?? 0, (int index) {
+  List<dynamic> images = List<dynamic>.generate(model.freelancer.portfolios?.length ?? 0, (int index) {
     if (model.freelancer.portfolios?[index] == '') {
       return null;
     }

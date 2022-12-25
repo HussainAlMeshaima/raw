@@ -58,8 +58,14 @@ class LoginView extends StatelessWidget {
                         showCursor: true,
                         controller: model.passwordTextEditingController,
                         cursorColor: AppColors().primary,
-                        obscureText: true,
+                        obscureText: model.isHidden == true ? true : false,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              model.toggleIsHidden();
+                            },
+                            icon: Icon(model.isHidden == true ? Icons.visibility : Icons.visibility_off),
+                          ),
                           hintText: 'Password',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -77,10 +83,8 @@ class LoginView extends StatelessWidget {
                           child: TextButton(
                               onPressed: () => model.doLogin(),
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    AppColors().primary),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
+                                backgroundColor: MaterialStateProperty.all(AppColors().primary),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),

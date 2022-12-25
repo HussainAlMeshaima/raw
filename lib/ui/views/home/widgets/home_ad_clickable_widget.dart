@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:raw/app/utils/constants.dart';
+import 'package:raw/ui/views/home/home_view_model.dart';
 
 class HomeAdClickableWidget extends StatelessWidget {
-  const HomeAdClickableWidget({
+  const HomeAdClickableWidget(
+    this.model, {
     required this.title,
     required this.desc,
     required this.adImage,
-    this.onTap,
+    required this.path,
     Key? key,
   }) : super(key: key);
 
+  final HomeViewModel model;
   final String title;
   final String desc;
   final String adImage;
-  final Function? onTap;
+  final String path;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -54,9 +57,7 @@ class HomeAdClickableWidget extends StatelessWidget {
               height: 30,
               width: 120,
               child: TextButton(
-                onPressed: () => {
-                  if (onTap != null) {onTap!()}
-                },
+                onPressed: () => {model.pushNamed(path)},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.white),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

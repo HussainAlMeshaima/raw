@@ -10,22 +10,30 @@ class LoginViewModel extends BaseViewModel {
   LoginViewModel(context) : super(context);
   Future<void> init() async {}
 
+  void toggleIsHidden({bool? value}) {
+    if (value != null)
+      _isHidden = value;
+    else
+      _isHidden = !_isHidden;
+
+    notifyListeners();
+  }
+
+  bool _isHidden = false;
+  bool get isHidden => _isHidden;
+
   final AuthService _authService = locator<AuthService>();
   Future<void> doLogin() async {
     if (emailTextEditingController.text.trim().isEmpty) {
       showSnackBar('Email felid required');
     } else if (passwordTextEditingController.text.trim().isEmpty) {
       showSnackBar('Password felid required');
-    } else if (emailTextEditingController.text.trim().isNotEmpty &&
-        passwordTextEditingController.text.trim().isNotEmpty) {
-      String message = await _authService.signInWithEmailAndPassword(
-          emailTextEditingController.text.trim(),
-          passwordTextEditingController.text.trim());
+    } else if (emailTextEditingController.text.trim().isNotEmpty && passwordTextEditingController.text.trim().isNotEmpty) {
+      String message = await _authService.signInWithEmailAndPassword(emailTextEditingController.text.trim(), passwordTextEditingController.text.trim());
 
       showSnackBar(message);
       if (message.contains('User Has Logged In')) {
-        Timer(const Duration(seconds: 4),
-            () => replaceNamed(const HomeRoute().path));
+        Timer(const Duration(seconds: 4), () => replaceNamed(const HomeRoute().path));
       } else {}
     }
   }
