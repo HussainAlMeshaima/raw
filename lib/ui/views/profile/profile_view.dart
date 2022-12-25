@@ -13,14 +13,8 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       viewModelBuilder: () => ProfileViewModel(context),
-      onModelReady: (ProfileViewModel model) async {
-        await model.init();
-      },
-      builder: (
-        BuildContext context,
-        ProfileViewModel model,
-        Widget? child,
-      ) {
+      onModelReady: (ProfileViewModel model) async => await model.init(),
+      builder: (BuildContext context, ProfileViewModel model, Widget? child) {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -36,9 +30,7 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             leading: IconButton(
-              onPressed: () {
-                model.goBack();
-              },
+              onPressed: () => model.goBack(),
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: AppColors().primary,
@@ -50,91 +42,95 @@ class ProfileView extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () async {
-                        await showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return ListView(
-                                shrinkWrap: true,
-                                children: [
-                                  ListTile(
-                                    onTap: () {
-                                      model.goBack();
-                                      model.openGallery();
-                                    },
-                                    leading: const Icon(Icons.photo),
-                                    title: const Text('Gallery'),
-                                  ),
-                                  ListTile(
-                                    onTap: () {
-                                      model.goBack();
-                                      model.openCamera();
-                                    },
-                                    leading: const Icon(Icons.camera),
-                                    title: const Text('Camera'),
-                                  ),
-                                ],
-                              );
-                            });
-                      },
-                      child: Container(
-                        height: 125,
-                        width: 125,
-                        decoration: BoxDecoration(
-                          image: model.userImage != null
-                              ? DecorationImage(
-                                  image: FileImage(File(model.userImage!.path)),
-                                  fit: BoxFit.cover,
-                                )
-                              : null,
-                          color: Colors.grey[300],
-                          shape: BoxShape.circle,
+                  const SizedBox(height: 20),
+                  model.isLoading
+                      ? Container(
+                          height: 125,
+                          width: 125,
+                          child: Center(
+                              child: CircularProgressIndicator(
+                            color: AppColors().primary,
+                          )),
+                        )
+                      : Center(
+                          child: GestureDetector(
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ListView(
+                                      shrinkWrap: true,
+                                      children: [
+                                        ListTile(
+                                          onTap: () {
+                                            model.goBack();
+                                            model.openGallery();
+                                          },
+                                          leading: const Icon(Icons.photo),
+                                          title: const Text('Gallery'),
+                                        ),
+                                        ListTile(
+                                          onTap: () {
+                                            model.goBack();
+                                            model.openCamera();
+                                          },
+                                          leading: const Icon(Icons.camera),
+                                          title: const Text('Camera'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              height: 125,
+                              width: 125,
+                              decoration: BoxDecoration(
+                                image: model.userImage != null
+                                    ? DecorationImage(
+                                        image: FileImage(
+                                            File(model.userImage!.path)),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : DecorationImage(
+                                        image: NetworkImage(model.user!.image!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                color: Colors.grey[300],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      'Change Photo',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  model.isLoading
+                      ? Container()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Text(
+                            'Change Photo',
+                            style: TextStyle(
+                              color: Colors.grey[800],
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: SizedBox(
                       height: 43,
                       child: Center(
                         child: TextField(
-                          readOnly: model.isNotChangable,
+                          readOnly: model.isNotChangeable,
                           controller: model.nameTextEditingController,
                           cursorColor: AppColors().primary,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  model.toggleIsNotChangable();
-                                },
-                                icon: Icon(
-                                  model.isNotChangable == true ? Icons.edit : Icons.edit_off,
-                                  color: AppColors().primary,
-                                  size: 18,
-                                ),
-                              ),
                               focusColor: AppColors().primary,
                               filled: true,
                               fillColor: const Color(0xffF6F6F6),
                               hintText: "UserName",
-                              hintStyle: const TextStyle(color: Color(0xff908E8E)),
+                              hintStyle:
+                                  const TextStyle(color: Color(0xff908E8E)),
                               contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
@@ -144,7 +140,8 @@ class ProfileView extends StatelessWidget {
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
                               )),
                         ),
                       ),
@@ -156,68 +153,17 @@ class ProfileView extends StatelessWidget {
                       height: 43,
                       child: Center(
                         child: TextField(
-                          readOnly: model.isNotChangable,
-                          controller: model.phoneNumberTextEditingController,
-                          cursorColor: AppColors().primary,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                model.toggleIsNotChangable();
-                              },
-                              icon: Icon(
-                                model.isNotChangable == true ? Icons.edit : Icons.edit_off,
-                                color: AppColors().primary,
-                                size: 18,
-                              ),
-                            ),
-                            focusColor: AppColors().primary,
-                            filled: true,
-                            fillColor: const Color(0xffF6F6F6),
-                            hintText: "UserPhoneNumber",
-                            hintStyle: const TextStyle(color: Color(0xff908E8E)),
-                            contentPadding: const EdgeInsets.only(
-                              bottom: 43 / 2,
-                              left: 7, // HERE THE IMPORTANT PART
-                            ),
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: SizedBox(
-                      height: 43,
-                      child: Center(
-                        child: TextField(
-                          readOnly: model.isNotChangable,
+                          readOnly: model.isNotChangeable,
                           controller: model.emailTextEditingController,
                           cursorColor: AppColors().primary,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                model.toggleIsNotChangable();
-                              },
-                              icon: Icon(
-                                model.isNotChangable == true ? Icons.edit : Icons.edit_off,
-                                color: AppColors().primary,
-                                size: 18,
-                              ),
-                            ),
                             focusColor: AppColors().primary,
                             filled: true,
                             fillColor: const Color(0xffF6F6F6),
                             hintText: "UserEmail",
-                            hintStyle: const TextStyle(color: Color(0xff908E8E)),
+                            hintStyle:
+                                const TextStyle(color: Color(0xff908E8E)),
                             contentPadding: const EdgeInsets.only(
                               bottom: 43 / 2,
                               left: 7, // HERE THE IMPORTANT PART
@@ -227,7 +173,8 @@ class ProfileView extends StatelessWidget {
                                 width: 0,
                                 style: BorderStyle.none,
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
                             ),
                           ),
                         ),
@@ -248,8 +195,10 @@ class ProfileView extends StatelessWidget {
                           },
                           //model.doLogin(),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            backgroundColor:
+                                MaterialStateProperty.all(AppColors().primary),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),

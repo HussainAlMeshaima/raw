@@ -32,26 +32,14 @@ class SearchView extends StatelessWidget {
               ),
             ),
             leading: IconButton(
-                onPressed: () {
-                  model.goBack();
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors().primary,
-                )),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  //TODO
-                },
-                icon: Icon(
-                  Icons.search,
-                  color: AppColors().primary,
-                ),
+              onPressed: () => model.goBack(),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors().primary,
               ),
-            ],
+            ),
           ),
-          body: Center(
+          body: const Center(
             child: Text(
               'SearchView',
             ),

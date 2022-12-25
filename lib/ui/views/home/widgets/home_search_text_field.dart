@@ -2,13 +2,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:raw/app/utils/constants.dart';
+import 'package:raw/ui/views/home/home_view_model.dart';
 
 class HomeSearchTextFieldWidget extends StatelessWidget {
-  const HomeSearchTextFieldWidget({
+  const HomeSearchTextFieldWidget(
+    this.model, {
     Key? key,
     required this.controller,
   }) : super(key: key);
 
+  final HomeViewModel model;
   final TextEditingController controller;
 
   @override
@@ -20,9 +23,7 @@ class HomeSearchTextFieldWidget extends StatelessWidget {
               height: 43,
               child: Center(
                 child: TextField(
-                  onSubmitted: (String? value) {
-                    print(value);
-                  },
+                  onSubmitted: (String? value) => model.searchOnSubmitted(value),
                   cursorColor: AppColors().primary,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(

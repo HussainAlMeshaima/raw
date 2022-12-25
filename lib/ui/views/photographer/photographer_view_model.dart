@@ -15,4 +15,6 @@ class PhotographerViewModel extends BaseViewModel {
 
   bool _isSelected = false;
   bool get isSelected => _isSelected;
+
+  // List<Fre>
 }

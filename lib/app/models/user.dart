@@ -7,13 +7,16 @@ class User {
   final String? email;
   final String? image;
 
-  User({this.email, this.name, this.image});
+  User({
+    this.email,
+    this.name,
+    this.image,
+  });
 
   User copyWith({
     String? email,
-    String? userName,
-    String? governance,
-    String? dob,
+    String? name,
+    String? image,
   }) =>
       User(
         email: email ?? this.email,

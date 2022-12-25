@@ -21,20 +21,24 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(context),
       onModelReady: (HomeViewModel model) async => await model.init(),
-      builder: (BuildContext context, HomeViewModel model, Widget? child) => Scaffold(
-          body: Padding(
+      builder: (BuildContext context, HomeViewModel model, Widget? child) =>
+          Scaffold(
+              body: Padding(
         padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
         child: Column(
           children: [
             HomeHeaderWidget(model),
-            HomeSearchTextFieldWidget(controller: model.searchController),
+            HomeSearchTextFieldWidget(
+              model,
+              controller: model.searchController,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     HomeSliderWidget(model),
                     HomeServicesWidget(model),
-                    HomeTopRatedWidget(),
+                    HomeTopRatedWidget(model),
                   ],
                 ),
               ),

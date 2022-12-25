@@ -46,7 +46,10 @@ class LoginView extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: 'Email',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: AppColors().primary),
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: AppColors().primary,
+                            ),
                           ),
                         ),
                       ),
@@ -59,7 +62,10 @@ class LoginView extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: 'Password',
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: AppColors().primary),
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: AppColors().primary,
+                            ),
                           ),
                         ),
                       ),
@@ -69,12 +75,12 @@ class LoginView extends StatelessWidget {
                           height: 40,
                           width: double.infinity,
                           child: TextButton(
-                              onPressed: () => model.pushNamed('/profile-view'),
-
-                              //model.doLogin(),
+                              onPressed: () => model.doLogin(),
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(AppColors().primary),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                backgroundColor: MaterialStateProperty.all(
+                                    AppColors().primary),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),

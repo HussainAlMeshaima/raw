@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:raw/app/models/Freelancer.dart';
+import 'package:raw/app/models/user.dart';
 import 'package:raw/app/router/router.gr.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,14 +15,9 @@ class PhotographerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<PhotographerViewModel>.reactive(
       viewModelBuilder: () => PhotographerViewModel(context),
-      onModelReady: (PhotographerViewModel model) async {
-        await model.init();
-      },
-      builder: (
-        BuildContext context,
-        PhotographerViewModel model,
-        Widget? child,
-      ) {
+      onModelReady: (PhotographerViewModel model) async => await model.init(),
+      builder:
+          (BuildContext context, PhotographerViewModel model, Widget? child) {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -36,9 +33,7 @@ class PhotographerView extends StatelessWidget {
               ),
             ),
             leading: IconButton(
-                onPressed: () {
-                  model.goBack();
-                },
+                onPressed: () => model.goBack(),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors().primary,
@@ -60,7 +55,7 @@ class PhotographerView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 30,
                       child: Center(
                         child: ListView(
@@ -77,13 +72,27 @@ class PhotographerView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
-                  child: Container(
+                  padding:
+                      const EdgeInsets.only(top: 20.0, left: 10, right: 10),
+                  child: SizedBox(
                     height: 900,
                     child: ListView(
                       scrollDirection: Axis.vertical,
                       children: [
-                        freelancerCard("Murtadah Ala'ali", AppImages.photographyLogo, ["Fucking", "Sucking"], 4.5, model)
+                        freelancerCard(
+                          model,
+                          Freelancer(
+                            rating: 3,
+                            freelancerTypes: [
+                              FreelancerTypes.STUDIO,
+                              FreelancerTypes.VIDEOGRAPHER
+                            ],
+                            user: User(
+                                name: 'Hussain Ali',
+                                image:
+                                    'https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png'),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -97,104 +106,117 @@ class PhotographerView extends StatelessWidget {
   }
 }
 
-Widget freelancerCard(String name, String image, List<String> skills, double rating, PhotographerViewModel model) {
+Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
   return InkWell(
     onTap: () {
       //TODO FREELANCER INFO
       model.pushNamed('/booking-view');
     },
-    child: Container(
-      height: 100,
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: Color(0xffD9D9D9).withOpacity(0.5),
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 80,
-              width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.white,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Container(
+        height: 100,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: const Color(0xffD9D9D9).withOpacity(0.5),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.white,
+                ),
+                child: freelancer.user?.image == null
+                    ? null
+                    : Image.network(freelancer.user!.image!),
               ),
-              //TODO CHANGE TO NETWORK IMAGE
-              child: Image.asset(image),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(color: AppColors().primary, fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                  child: Container(
-                    height: 2,
-                    width: 170,
-                    color: Color(0xffCACACA),
+              const SizedBox(width: 30),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    freelancer.user?.name ?? '-',
+                    style: TextStyle(
+                        color: AppColors().primary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: skills.length > 1
-                      ? Row(
-                          children: [
-                            Text(
-                              skills[0],
-                              style: TextStyle(color: Color(0xff717171)),
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Container(
-                                height: 15,
-                                width: 1,
-                                color: Color(0xffCACACA),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    child: Container(
+                      height: 2,
+                      width: 170,
+                      color: const Color(0xffCACACA),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: (freelancer.freelancerTypes?.length != null) &&
+                            (freelancer.freelancerTypes!.length > 1)
+                        ? Row(
+                            children: [
+                              Text(
+                                freelancer.freelancerTypes?[0].name
+                                        .toString() ??
+                                    '-',
+                                style: const TextStyle(
+                                  color: Color(0xff717171),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text(
-                              skills[1],
-                              style: TextStyle(color: Color(0xff717171)),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            Text(
-                              skills[0],
-                              style: TextStyle(color: Color(0xff717171)),
-                            ),
-                          ],
-                        ),
-                ),
-                RatingBarIndicator(
-                  rating: rating,
-                  itemBuilder: (context, index) => Icon(
-                    Icons.star,
-                    color: Colors.amberAccent,
+                              const SizedBox(width: 3),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
+                                child: Container(
+                                  height: 15,
+                                  width: 1,
+                                  color: const Color(0xffCACACA),
+                                ),
+                              ),
+                              const SizedBox(width: 3),
+                              Text(
+                                freelancer.freelancerTypes?[1].name
+                                        .toString() ??
+                                    '-',
+                                style:
+                                    const TextStyle(color: Color(0xff717171)),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              Text(
+                                freelancer.freelancerTypes?[0].name
+                                        .toString() ??
+                                    '-',
+                                style:
+                                    const TextStyle(color: Color(0xff717171)),
+                              ),
+                            ],
+                          ),
                   ),
-                  itemCount: 5,
-                  itemSize: 16.0,
-                  direction: Axis.horizontal,
-                ),
-              ],
-            )
-          ],
+                  RatingBarIndicator(
+                    rating: freelancer.rating ?? 0.0,
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.amberAccent,
+                    ),
+                    itemCount: 5,
+                    itemSize: 16.0,
+                    direction: Axis.horizontal,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     ),
@@ -214,12 +236,19 @@ Widget filterItem(String title, PhotographerViewModel model, int index) {
       child: Container(
         height: 10,
         width: 80,
-        decoration: BoxDecoration(color: isSelected == true && _index == index ? AppColors().primary : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: AppColors().primary)),
+        decoration: BoxDecoration(
+            color: isSelected == true && _index == index
+                ? AppColors().primary
+                : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors().primary)),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-              color: isSelected == true && _index == index ? Colors.white : AppColors().primary,
+              color: isSelected == true && _index == index
+                  ? Colors.white
+                  : AppColors().primary,
               fontSize: 12,
             ),
           ),

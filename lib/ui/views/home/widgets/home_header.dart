@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raw/app/router/router.dart';
 import 'package:raw/app/utils/constants.dart';
 import 'package:raw/ui/views/home/home_view_model.dart';
 
@@ -28,14 +29,19 @@ class HomeHeaderWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 25.0),
                           child: model.user?.image != null
-                              ? Container(
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(model.user!.image!),
-                                        fit: BoxFit.fill),
-                                    shape: BoxShape.circle,
+                              ? GestureDetector(
+                                  onTap: () => model
+                                      .pushNamed(const ProfileRoute().path),
+                                  child: Container(
+                                    height: 60,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image:
+                                              NetworkImage(model.user!.image!),
+                                          fit: BoxFit.fill),
+                                      shape: BoxShape.circle,
+                                    ),
                                   ),
                                 )
                               : Container(
@@ -66,7 +72,7 @@ class HomeHeaderWidget extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 6),
+                                    const SizedBox(width: 6),
                                     Image.asset(
                                       AppImages.helloEmoji,
                                       height: 15,
@@ -76,7 +82,7 @@ class HomeHeaderWidget extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Murtadha Alaali',
+                                model.user?.name ?? '-',
                                 style: TextStyle(
                                   color: AppColors().primary,
                                   fontWeight: FontWeight.bold,
@@ -101,9 +107,7 @@ class HomeHeaderWidget extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      model.pushNamed('/settings-view');
-                    },
+                    onPressed: () => model.pushNamed('/settings-view'),
                     icon: Icon(
                       Icons.settings,
                       color: AppColors().primary,

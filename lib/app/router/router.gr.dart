@@ -154,7 +154,7 @@ class RawRouter extends _i23.RootStackRouter {
     SettingsRoute.name: (routeData) {
       return _i23.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: _i16.SettingsView(),
+        child: const _i16.SettingsView(),
         opaque: true,
       );
     },
