@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:raw/app/models/Package.dart';
 import 'package:stacked/stacked.dart';
 
 import './booking_checkout_view_model.dart';
 
 class BookingCheckoutView extends StatelessWidget {
-  const BookingCheckoutView({Key? key}) : super(key: key);
+  const BookingCheckoutView({
+    this.package,
+    Key? key,
+  }) : super(key: key);
+
+  final Package? package;
 
   @override
   Widget build(BuildContext context) {

@@ -16,7 +16,7 @@ class BordingViewModel extends BaseViewModel {
       String uuid = _authService.user!.uid;
       _user = await _userService.getUser(uuid);
 
-      if (_user?.isAdmin == false) {
+      if (_user?.isAdmin != false) {
         pushNamed(const AdminRoute().path);
       } else {
         pushNamed(const HomeRoute().path);

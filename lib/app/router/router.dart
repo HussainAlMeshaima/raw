@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:raw/ui/views/add_freelancer/add_freelancer_view.dart';
+import 'package:raw/ui/views/booking_checkout/booking_checkout_view.dart';
 import 'package:raw/ui/views/check_out/check_out_view.dart';
 import 'package:raw/ui/views/freelance_panel/freelance_panel_view.dart';
 import 'package:raw/ui/views/home/home_view.dart';
@@ -50,6 +51,7 @@ export './router.gr.dart';
     AdaptiveRoute(page: RentOrdersView),
     AdaptiveRoute(page: FreelancePanelView),
     AdaptiveRoute(page: SearchView),
+    AdaptiveRoute(page: BookingCheckoutView),
   ],
 )
 class $RawRouter {}
