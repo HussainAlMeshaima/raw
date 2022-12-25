@@ -3,12 +3,13 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:raw/app/models/BadTypeException.dart';
 import 'package:raw/app/models/Package.dart';
 import 'package:raw/app/models/user.dart';
 
 enum WorkArea { INDOOR, OUTDOOR }
 
-enum FreelancerTypes { PHOTOGRAPHER, VIDEOGRAPHER, STUDIO }
+enum FreelancerTypes { PHOTOGRAPHER, VIDEOGRAPHER, STUDIO, NONE }
 
 class Freelancer {
   List<FreelancerTypes>? freelancerTypes;
@@ -78,16 +79,26 @@ class Freelancer {
 
     List<dynamic> ft = map['freelancerTypes'] as List<dynamic>;
     List<FreelancerTypes> fl2 = [];
+
+    ft.forEach((dynamic element) => fl2.add(FreelancerTypes.values.firstWhere((e) => describeEnum(e) == element.toUpperCase())));
+
+    List<FreelancerTypes>? allowedTypes = map['allowedTypes'];
+
+    if (allowedTypes != null &&
+        !(allowedTypes.any((FreelancerTypes item) => fl2.contains(item)))) {
+      throw BadTypeException();
+    }
+
     for (var element in ft) {
-      fl2.add(FreelancerTypes.values
-          .firstWhere((e) => describeEnum(e) == element.toUpperCase()));
+      FreelancerTypes type = FreelancerTypes.values.firstWhere((e) => describeEnum(e) == element.toUpperCase());
+
+      fl2.add(type);
     }
 
     List<dynamic> was = map['workAreas'] as List<dynamic>;
     List<WorkArea> was2 = [];
     for (var element in was) {
-      was2.add(WorkArea.values
-          .firstWhere((e) => describeEnum(e) == element.toUpperCase()));
+      was2.add(WorkArea.values.firstWhere((e) => describeEnum(e) == element.toUpperCase()));
     }
 
     List<String> portfolios = [];
@@ -107,6 +118,5 @@ class Freelancer {
       workAreas: was2,
     );
   }
-  factory Freelancer.fromJson(String source) =>
-      Freelancer.fromMap(json.decode(source));
+  factory Freelancer.fromJson(String source) => Freelancer.fromMap(json.decode(source));
 }

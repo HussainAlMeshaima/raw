@@ -30,10 +30,14 @@ class HomeServicesWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              HomeServiceWidget(AppImages.photographyLogo, 'Photography', () {model.pushNamed('/photographer-view');}),
-              HomeServiceWidget(AppImages.videographyLogo, 'Videography', () {model.pushNamed('/videographer-view');}),
-              HomeServiceWidget(AppImages.studioLogo, 'Studio', () {model.pushNamed('/studio-view');}),
-              HomeServiceWidget(AppImages.rentLogo, 'Rent', () {model.pushNamed('/rent-view');}),
+              HomeServiceWidget(AppImages.photographyLogo, 'Photography',
+                  () => model.pushNamed('/photographer-view')),
+              HomeServiceWidget(AppImages.videographyLogo, 'Videography', () {
+                model.pushNamed('/videographer-view');
+              }),
+              HomeServiceWidget(AppImages.studioLogo, 'Studio',
+                  () => model.pushNamed('/studio-view')),
+              HomeServiceWidget(AppImages.rentLogo, 'Rent', () => model.pushNamed('/rent-view')),
             ],
           ),
         ],

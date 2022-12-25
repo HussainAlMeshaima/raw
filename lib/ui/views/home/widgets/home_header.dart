@@ -95,12 +95,10 @@ class HomeHeaderWidget extends StatelessWidget {
                       ],
                     ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const SizedBox(width: 60),
                   IconButton(
-                    onPressed: () {
-                      model.pushNamed('/cart-view');
-                    },
+                    onPressed: () => model.pushNamed('/cart-view'),
                     icon: Icon(
                       Icons.shopping_cart_outlined,
                       color: AppColors().primary,

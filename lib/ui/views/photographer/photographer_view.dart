@@ -1,15 +1,20 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raw/app/models/Freelancer.dart';
 import 'package:raw/app/models/user.dart';
 import 'package:raw/app/router/router.gr.dart';
 import 'package:stacked/stacked.dart';
+import 'package:flutter/material.dart';
 
 import './photographer_view_model.dart';
 import '../../../app/utils/constants.dart';
 
 class PhotographerView extends StatelessWidget {
-  const PhotographerView({Key? key}) : super(key: key);
+  const PhotographerView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +25,7 @@ class PhotographerView extends StatelessWidget {
           (BuildContext context, PhotographerViewModel model, Widget? child) {
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              "Photographers",
-              style: TextStyle(
-                color: AppColors().primary,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            leading: IconButton(
-                onPressed: () => model.goBack(),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors().primary,
-                )),
-            actions: [
-              IconButton(
-                onPressed: () => model.pushNamed(SearchRoute().path),
-                icon: Icon(
-                  Icons.search,
-                  color: AppColors().primary,
-                ),
-              ),
-            ],
-          ),
+          appBar: AppBarWidget(model),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,11 +39,10 @@ class PhotographerView extends StatelessWidget {
                         child: ListView(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           scrollDirection: Axis.horizontal,
-                          children: [
-                            filterItem('All', model, 0),
-                            filterItem('Indoor', model, 1),
-                            filterItem('Outdoor', model, 2),
-                          ],
+                          children: List.generate(
+                            model.filters.length,
+                            (index) => filterItem(model: model, index: index),
+                          ),
                         ),
                       ),
                     ),
@@ -223,30 +200,24 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
   );
 }
 
-Widget filterItem(String title, PhotographerViewModel model, int index) {
-  int _index = 0;
-  bool isSelected = model.isSelected;
+Widget filterItem({required PhotographerViewModel model, required int index}) {
   return InkWell(
-    onTap: () {
-      _index = index;
-      model.toggleIsSelected();
-    },
+    onTap: () => model.changeFilterIndex(index),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
         height: 10,
         width: 80,
         decoration: BoxDecoration(
-            color: isSelected == true && _index == index
-                ? AppColors().primary
-                : Colors.white,
+            color:
+                model.filterIndex == index ? AppColors().primary : Colors.white,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColors().primary)),
         child: Center(
           child: Text(
-            title,
+            model.filters[index],
             style: TextStyle(
-              color: isSelected == true && _index == index
+              color: model.filterIndex == index
                   ? Colors.white
                   : AppColors().primary,
               fontSize: 12,
@@ -255,5 +226,36 @@ Widget filterItem(String title, PhotographerViewModel model, int index) {
         ),
       ),
     ),
+  );
+}
+
+AppBar AppBarWidget(PhotographerViewModel model) {
+  return AppBar(
+    backgroundColor: Colors.white,
+    elevation: 0,
+    centerTitle: true,
+    title: Text(
+      "Photographers",
+      style: TextStyle(
+        color: AppColors().primary,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    leading: IconButton(
+        onPressed: () => model.goBack(),
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: AppColors().primary,
+        )),
+    actions: [
+      IconButton(
+        onPressed: () => model.pushNamed(SearchRoute().path),
+        icon: Icon(
+          Icons.search,
+          color: AppColors().primary,
+        ),
+      ),
+    ],
   );
 }

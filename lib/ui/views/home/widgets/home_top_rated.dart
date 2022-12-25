@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raw/app/models/Freelancer.dart';
+import 'package:raw/app/router/router.dart';
 import 'package:raw/app/utils/constants.dart';
 import 'package:raw/ui/views/home/home_view_model.dart';
 
@@ -53,8 +54,10 @@ class HomeTopRatedWidget extends StatelessWidget {
                         Freelancer freelancer = model.freelancers[index];
                         return Padding(
                           padding: const EdgeInsets.only(top: 10.0),
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: () {
+                              throw UnimplementedError();
+
                               ///TODO WTF IS HERE ?
                             },
                             child: Center(
@@ -77,7 +80,8 @@ class HomeTopRatedWidget extends StatelessWidget {
                                           image: freelancer.user?.image != null
                                               ? DecorationImage(
                                                   image: NetworkImage(
-                                                      freelancer.user!.image!), fit: BoxFit.cover)
+                                                      freelancer.user!.image!),
+                                                  fit: BoxFit.cover)
                                               : null),
                                     ),
                                     const SizedBox(width: 15),

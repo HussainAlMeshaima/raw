@@ -14,6 +14,7 @@ class HomeViewModel extends BaseViewModel {
     String uuid = await _authService.userId() ?? '';
     _user = await _userService.getUser(uuid);
     _freelancers = await _freelancerService.getFreelancers();
+    _freelancers.sort();
     toggleIsLoading();
   }
 
