@@ -12,11 +12,7 @@ class BordingView extends StatelessWidget {
     return ViewModelBuilder<BordingViewModel>.reactive(
       viewModelBuilder: () => BordingViewModel(context),
       onModelReady: (BordingViewModel model) async => await model.init(),
-      builder: (
-        BuildContext context,
-        BordingViewModel model,
-        Widget? child,
-      ) {
+      builder: (BuildContext context, BordingViewModel model, Widget? child) {
         return Scaffold(
           body: SingleChildScrollView(
             child: Column(

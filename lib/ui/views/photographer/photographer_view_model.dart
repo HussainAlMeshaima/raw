@@ -6,20 +6,25 @@ import 'package:raw/app/services/FreelancerService.dart';
 class PhotographerViewModel extends BaseViewModel {
   PhotographerViewModel(context) : super(context);
   Future<void> init() async {
-    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+    await fetch();
     toggleIsLoading();
+  }
+
+  final FreelancerService _freelancerService = locator<FreelancerService>();
+
+  Future<void> fetch() async {
+    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
   }
 
   Future<void> getAllFreelancers() async {
     toggleIsLoading(value: true);
-    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+    await fetch();
     toggleIsLoading(value: false);
   }
 
   Future<void> getAllIndoorFreelancers() async {
     toggleIsLoading(value: true);
-    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
-
+    await fetch();
     _freelancers = _freelancers.where((Freelancer freelancer) {
       return freelancer.workAreas?.contains(WorkArea.INDOOR) ?? false;
     }).toList();
@@ -29,15 +34,13 @@ class PhotographerViewModel extends BaseViewModel {
 
   Future<void> getAllOutDoorFreelancers() async {
     toggleIsLoading(value: true);
-    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+    await fetch();
     _freelancers = _freelancers.where((Freelancer freelancer) {
       return freelancer.workAreas?.contains(WorkArea.OUTDOOR) ?? false;
     }).toList();
 
     toggleIsLoading(value: false);
   }
-
-  final FreelancerService _freelancerService = locator<FreelancerService>();
 
   void toggleIsLoading({bool? value}) {
     if (value != null) {

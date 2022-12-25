@@ -386,8 +386,6 @@ Widget freelancerPortfolioCard(BookingViewModel model) {
     return model.freelancer.portfolios?[index];
   });
 
-  print(images.length);
-
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

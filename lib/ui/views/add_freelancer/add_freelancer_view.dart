@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -17,240 +19,297 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
     return ViewModelBuilder<AddFreelancerViewModel>.reactive(
       viewModelBuilder: () => AddFreelancerViewModel(context),
       onModelReady: (AddFreelancerViewModel model) async => await model.init(),
-      builder: (BuildContext context, AddFreelancerViewModel model, Widget? child) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
+      builder:
+          (BuildContext context, AddFreelancerViewModel model, Widget? child) {
+        return GestureDetector(
+          onTap: () => model.unfocus(),
+          child: Scaffold(
             backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              'Add Freelancer',
-              style: TextStyle(
-                color: AppColors().primary,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                'Add Freelancer',
+                style: TextStyle(
+                  color: AppColors().primary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            leading: IconButton(
-                onPressed: () {
-                  model.goBack();
-                },
+              leading: IconButton(
+                onPressed: () => model.goBack(),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors().primary,
-                )),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10, left: 10, top: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            //TODO Add profile Photo
-                          },
-                          child: Container(
-                            height: 125,
-                            width: 125,
-                            decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
+                ),
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10, left: 10, top: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ListView(
+                                      shrinkWrap: true,
+                                      children: [
+                                        ListTile(
+                                          onTap: () {
+                                            model.goBack();
+                                            model.openGallery();
+                                          },
+                                          leading: const Icon(Icons.photo),
+                                          title: const Text('Gallery'),
+                                        ),
+                                        ListTile(
+                                          onTap: () {
+                                            model.goBack();
+                                            model.openCamera();
+                                          },
+                                          leading: const Icon(Icons.camera),
+                                          title: const Text('Camera'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              height: 125,
+                              width: 125,
+                              decoration: BoxDecoration(
+                                image: model.userImage != null
+                                    ? DecorationImage(
+                                        image: FileImage(
+                                            File(model.userImage!.path)),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null,
+                                color: Colors.grey[300],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Text(
-                            'Choose Photo',
-                            style: TextStyle(
-                              color: Colors.grey[800],
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Text(
+                              'Choose Photo',
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: SizedBox(
+                        height: 43,
+                        child: Center(
+                          child: TextField(
+                            cursorColor: AppColors().primary,
+                            textAlignVertical: TextAlignVertical.center,
+                            controller: model.nameTextEditingController,
+                            decoration: InputDecoration(
+                              focusColor: AppColors().primary,
+                              filled: true,
+                              fillColor: const Color(0xffF6F6F6),
+                              hintText: "Name",
+                              hintStyle:
+                                  const TextStyle(color: Color(0xff908E8E)),
+                              contentPadding: const EdgeInsets.only(
+                                bottom: 43 / 2,
+                                left: 7, // HERE THE IMPORTANT PART
+                              ),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Container(
-                      height: 43,
-                      child: Center(
-                        child: TextField(
-                          cursorColor: AppColors().primary,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                              focusColor: AppColors().primary,
-                              filled: true,
-                              fillColor: Color(0xffF6F6F6),
-                              hintText: "Name",
-                              hintStyle: TextStyle(color: Color(0xff908E8E)),
-                              contentPadding: EdgeInsets.only(
-                                bottom: 43 / 2,
-                                left: 7, // HERE THE IMPORTANT PART
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                              )),
-                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Container(
-                      height: 43,
-                      child: Center(
-                        child: TextField(
-                          cursorColor: AppColors().primary,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: SizedBox(
+                        height: 43,
+                        child: Center(
+                          child: TextField(
+                            cursorColor: AppColors().primary,
+                            textAlignVertical: TextAlignVertical.center,
+                            controller: model.emailTextEditingController,
+                            decoration: InputDecoration(
                               focusColor: AppColors().primary,
                               filled: true,
-                              fillColor: Color(0xffF6F6F6),
+                              fillColor: const Color(0xffF6F6F6),
                               hintText: "Email",
-                              hintStyle: TextStyle(color: Color(0xff908E8E)),
-                              contentPadding: EdgeInsets.only(
+                              hintStyle:
+                                  const TextStyle(color: Color(0xff908E8E)),
+                              contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                              )),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Container(
-                      height: 43,
-                      child: Center(
-                        child: TextField(
-                          cursorColor: AppColors().primary,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: SizedBox(
+                        height: 43,
+                        child: Center(
+                          child: TextField(
+                            cursorColor: AppColors().primary,
+                            textAlignVertical: TextAlignVertical.center,
+                            controller: model.phoneNumberTextEditingController,
+                            decoration: InputDecoration(
                               focusColor: AppColors().primary,
                               filled: true,
-                              fillColor: Color(0xffF6F6F6),
+                              fillColor: const Color(0xffF6F6F6),
                               hintText: "Phone number",
-                              hintStyle: TextStyle(color: Color(0xff908E8E)),
-                              contentPadding: EdgeInsets.only(
+                              hintStyle:
+                                  const TextStyle(color: Color(0xff908E8E)),
+                              contentPadding: const EdgeInsets.only(
                                 bottom: 43 / 2,
                                 left: 7, // HERE THE IMPORTANT PART
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 0,
                                   style: BorderStyle.none,
                                 ),
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                              )),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Container(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
                       child: Center(
                         child: TextField(
                           keyboardType: TextInputType.multiline,
-                          minLines: 1, //Normal textInputField will be displayed
+                          minLines: 1,
                           maxLines: null,
                           cursorColor: AppColors().primary,
                           textAlignVertical: TextAlignVertical.center,
+                          controller: model.descriptionTextEditingController,
                           decoration: InputDecoration(
-                              focusColor: AppColors().primary,
-                              filled: true,
-                              fillColor: Color(0xffF6F6F6),
-                              hintText: "Description",
-                              hintStyle: TextStyle(color: Color(0xff908E8E)),
-                              contentPadding: EdgeInsets.only(
-                                bottom: 43 / 2,
-                                left: 7, // HERE THE IMPORTANT PART
+                            focusColor: AppColors().primary,
+                            filled: true,
+                            fillColor: const Color(0xffF6F6F6),
+                            hintText: "Description",
+                            hintStyle:
+                                const TextStyle(color: Color(0xff908E8E)),
+                            contentPadding: const EdgeInsets.only(
+                              bottom: 43 / 2,
+                              left: 7, // HERE THE IMPORTANT PART
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
                               ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                              )),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 17,
-                  ),
-                  Text(
-                    'Freelancer Type',
-                    style: TextStyle(
-                      color: AppColors().primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
-                  ),
-                  checkBox(model),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 13.0),
-                    child: InkWell(
-                      onTap: () {
-                        _showAddPackageDialog(context);
-                      },
-                      child: Container(
-                        width: 200,
-                        height: 40,
-                        decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(12)),
-                        child: Center(
-                          child: const Text(
-                            'Add Freelancer',
-                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 17,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: packageCard(),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        height: 55,
-                        width: double.infinity,
-                        decoration: BoxDecoration(color: AppColors().primary, borderRadius: BorderRadius.circular(30)),
-                        child: Center(
-                          child: const Text(
-                            'Add',
-                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    const SizedBox(height: 17),
+                    Text(
+                      'Freelancer Type',
+                      style: TextStyle(
+                        color: AppColors().primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                    checkBox(model),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 13.0),
+                      child: InkWell(
+                        onTap: () => _showAddPackageDialog(context),
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: AppColors().primary,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Center(
+                            child: const Text(
+                              'Add Freelancer',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 17,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: packageCard(),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 55,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: AppColors().primary,
+                              borderRadius: BorderRadius.circular(30)),
+                          child: Center(
+                            child: const Text(
+                              'Add',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -261,46 +320,34 @@ class _AddFreelancerViewState extends State<AddFreelancerView> {
 }
 
 Widget checkBox(AddFreelancerViewModel model) {
-  bool _photographers = model.photographers;
-  bool _videographers = model.videographers;
-  bool _studio = model.studio;
   return Column(
     children: [
       CheckboxListTile(
-        title: Text(
+        title: const Text(
           'Photographers',
           style: TextStyle(color: Color(0xFF14213D)),
         ),
         activeColor: AppColors().primary,
-        value: _photographers,
-        onChanged: (value) {
-          model.toggleIsPhotographer();
-          _photographers = model.photographers;
-        },
+        value: model.photographers,
+        onChanged: (value) => model.toggleIsPhotographer(value: value),
       ),
       CheckboxListTile(
-        title: Text(
-          'Videographers',
+        title: const Text(
+          'Videographer',
           style: TextStyle(color: Color(0xFF14213D)),
         ),
         activeColor: AppColors().primary,
-        value: _videographers,
-        onChanged: (value) {
-          model.toggleIsVideographer();
-          _videographers = model.videographers;
-        },
+        value: model.videographer,
+        onChanged: (value) => model.toggleIsVideographer(value: value),
       ),
       CheckboxListTile(
-        title: Text(
+        title: const Text(
           'Studio',
           style: TextStyle(color: Color(0xFF14213D)),
         ),
         activeColor: AppColors().primary,
-        value: _studio,
-        onChanged: (value) {
-          model.toggleIsStudio();
-          _studio = model.studio;
-        },
+        value: model.studio,
+        onChanged: (value) => model.toggleIsStudio(value: value),
       ),
     ],
   );

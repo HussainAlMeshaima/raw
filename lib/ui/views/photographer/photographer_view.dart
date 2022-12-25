@@ -138,64 +138,17 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
-                    child: (freelancer.freelancerTypes?.length != null) &&
-                            (freelancer.freelancerTypes!.length > 1)
-                        ? Row(
-                            children: [
-                              SizedBox(
-                                width: 80,
-                                child: Text(
-                                  freelancer.freelancerTypes?[0].name
-                                          .toLowerCase()
-                                          .toString() ??
-                                      '-',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: Color(0xff717171),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 3),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
-                                child: Container(
-                                  height: 15,
-                                  width: 1,
-                                  color: const Color(0xffCACACA),
-                                ),
-                              ),
-                              const SizedBox(width: 3),
-                              SizedBox(
-                                width: 80,
-                                child: Text(
-                                  freelancer.freelancerTypes?[1].name
-                                          .toLowerCase()
-                                          .toString() ??
-                                      '-',
-                                  overflow: TextOverflow.ellipsis,
-                                  style:
-                                      const TextStyle(color: Color(0xff717171)),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              SizedBox(
-                                width: 160,
-                                child: Text(
-                                  freelancer.freelancerTypes?[0].name
-                                          .toLowerCase()
-                                          .toString() ??
-                                      '-',
-                                  overflow: TextOverflow.ellipsis,
-                                  style:
-                                      const TextStyle(color: Color(0xff717171)),
-                                ),
-                              ),
-                            ],
+                    child: Row(
+                      children: const [
+                        SizedBox(
+                          child: Text(
+                            'Photographer',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Color(0xff717171)),
                           ),
+                        ),
+                      ],
+                    ),
                   ),
                   RatingBarIndicator(
                     rating: freelancer.rating ?? 0.0,
