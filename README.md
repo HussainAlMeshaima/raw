@@ -1,18 +1,6 @@
-# aaab
+# Raw
 
-This a FUCKING project is for Dr Ehab sinor FUCKING project
 
-long story short, this FUCKING app is for lost pets (dogs, cats and humans)
-
-Tf you have a fucking lost your dog, and cannot find it and no body gives a shit about it.
-
-Did you guess who gave a shit ? well surprise you are right, this FUCKING app will find it.
-
-the way this fucking app functions is you post a pic of your fucking kid and tell people to find him.
-
-that is someone installed the app LMFAO
-
-i as developer will not install the FUCKING app even if i created it LOL
 
 ## flutter sdk
 

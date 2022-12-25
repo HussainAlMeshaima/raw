@@ -15,133 +15,134 @@ class CartView extends StatelessWidget {
       onModelReady: (CartViewModel model) async => await model.init(),
       builder: (BuildContext context, CartViewModel model, Widget? child) {
         return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              centerTitle: true,
-              title: Text(
-                "Cart",
-                style: TextStyle(
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              "Cart",
+              style: TextStyle(
+                color: AppColors().primary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            leading: IconButton(
+                onPressed: () => model.goBack(),
+                icon: Icon(
+                  Icons.arrow_back_ios,
                   color: AppColors().primary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                )),
+            actions: [
+              IconButton(
+                onPressed: () => model.removeAllPackages(),
+                icon: Icon(
+                  Icons.delete_rounded,
+                  color: AppColors().primary,
                 ),
               ),
-              leading: IconButton(
-                  onPressed: () => model.goBack(),
-                  icon: Icon(
-                    Icons.arrow_back_ios,
+            ],
+          ),
+          bottomSheet: SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: model.isCheckout == true
+                ? Container(
                     color: AppColors().primary,
-                  )),
-              actions: [
-                IconButton(
-                  onPressed: () => model.removeAllPackages(),
-                  icon: Icon(
-                    Icons.delete_rounded,
-                    color: AppColors().primary,
-                  ),
-                ),
-              ],
-            ),
-            bottomSheet: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: model.isCheckout == true
-                  ? Container(
-                      color: AppColors().primary,
-                      height: 50,
-                      width: double.infinity,
-                      child: const Center(
-                        child: Text(
-                          'Done',
-                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
+                    height: 50,
+                    width: double.infinity,
+                    child: const Center(
+                      child: Text(
+                        'Done',
+                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
                       ),
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
+                    ),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 220,
+                        child: Center(
+                            child: Text(
+                          '${model.totalPrice()} BD',
+                          style: TextStyle(
+                            color: AppColors().primary,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () => model.pushNamed('/check-out-view'),
+                        child: Container(
+                          color: AppColors().primary,
                           height: 50,
-                          width: 220,
-                          child: Center(
+                          width: 150,
+                          child: const Center(
                               child: Text(
-                            '${model.totalPrice()} BD',
-                            style: TextStyle(
-                              color: AppColors().primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            'Checkout',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
                           )),
                         ),
-                        const Spacer(),
-                        InkWell(
-                          onTap: () => model.pushNamed('/check-out-view'),
-                          child: Container(
-                            color: AppColors().primary,
-                            height: 50,
-                            width: 150,
-                            child: const Center(
-                                child: Text(
-                              'Checkout',
-                              style: TextStyle(color: Colors.white, fontSize: 15),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 28.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF0F4F9),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+                      )
+                    ],
                   ),
-                  child: model.packages.isEmpty
-                      ? Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(
-                                Icons.add_shopping_cart_outlined,
-                                color: Color(0xffFCA311),
-                                size: 80,
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 28.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xffF0F4F9),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+                ),
+                child: model.packages.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.add_shopping_cart_outlined,
+                              color: Color(0xffFCA311),
+                              size: 80,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'No items added!',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'No items added!',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
-                          child: SingleChildScrollView(
-                            child: Container(
-                              constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height - 160),
-                              child: Column(
-                                children: List.generate(model.packages.length, (int index) {
-                                  return cartProductWidget(
-                                    model,
-                                    model.packages[index],
-                                  );
-                                }),
-                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
+                        child: SingleChildScrollView(
+                          child: Container(
+                            constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height - 160),
+                            child: Column(
+                              children: List.generate(model.packages.length, (int index) {
+                                return cartProductWidget(
+                                  model,
+                                  model.packages[index],
+                                );
+                              }),
                             ),
                           ),
                         ),
-                ),
+                      ),
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }
