@@ -55,11 +55,8 @@ class HomeTopRatedWidget extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: GestureDetector(
-                            onTap: () {
-                              throw UnimplementedError();
-
-                              ///TODO WTF IS HERE ?
-                            },
+                            onTap: () => model
+                                .push(BookingRoute(freelancer: freelancer)),
                             child: Center(
                               child: Container(
                                 width: MediaQuery.of(context).size.width - 20,

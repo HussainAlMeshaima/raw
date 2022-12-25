@@ -24,10 +24,11 @@ class PhotographerViewModel extends BaseViewModel {
   final FreelancerService _freelancerService = locator<FreelancerService>();
 
   void toggleIsSelected({bool? value}) {
-    if (value != null)
+    if (value != null) {
       _isSelected = value;
-    else
+    } else {
       _isSelected = !_isSelected;
+    }
 
     notifyListeners();
   }

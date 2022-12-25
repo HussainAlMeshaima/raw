@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raw/app/models/Freelancer.dart';
 import 'package:raw/app/models/user.dart';
 import 'package:raw/app/router/router.gr.dart';
+import 'package:raw/ui/views/booking/booking_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 
@@ -55,22 +56,13 @@ class PhotographerView extends StatelessWidget {
                     height: 900,
                     child: ListView(
                       scrollDirection: Axis.vertical,
-                      children: [
-                        freelancerCard(
+                      children: List.generate(
+                        model.freelancers.length,
+                        (int index) => freelancerCard(
                           model,
-                          Freelancer(
-                            rating: 3,
-                            freelancerTypes: [
-                              FreelancerTypes.STUDIO,
-                              FreelancerTypes.VIDEOGRAPHER
-                            ],
-                            user: User(
-                                name: 'Hussain Ali',
-                                image:
-                                    'https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png'),
-                          ),
+                          model.freelancers[index],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 )
@@ -85,10 +77,7 @@ class PhotographerView extends StatelessWidget {
 
 Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
   return InkWell(
-    onTap: () {
-      //TODO FREELANCER INFO
-      model.pushNamed('/booking-view');
-    },
+    onTap: () => model.push(BookingRoute(freelancer: freelancer)),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
@@ -209,10 +198,11 @@ Widget filterItem({required PhotographerViewModel model, required int index}) {
         height: 10,
         width: 80,
         decoration: BoxDecoration(
-            color:
-                model.filterIndex == index ? AppColors().primary : Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors().primary)),
+          color:
+              model.filterIndex == index ? AppColors().primary : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppColors().primary),
+        ),
         child: Center(
           child: Text(
             model.filters[index],

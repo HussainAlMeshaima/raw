@@ -21,6 +21,7 @@ class Freelancer {
   List<String>? portfolios;
   User? user;
   List<WorkArea>? workAreas;
+  String? description;
 
   Freelancer({
     this.freelancerTypes,
@@ -32,6 +33,7 @@ class Freelancer {
     this.portfolios,
     this.user,
     this.workAreas,
+    this.description,
   });
 
   Freelancer copyWith({
@@ -47,6 +49,7 @@ class Freelancer {
     List<String>? portfolios,
     User? user,
     List<WorkArea>? workAreas,
+    String? description,
   }) =>
       Freelancer(
         freelancerTypes: freelancerTypes ?? this.freelancerTypes,
@@ -58,6 +61,7 @@ class Freelancer {
         portfolios: portfolios ?? this.portfolios,
         user: user ?? this.user,
         workAreas: workAreas ?? this.workAreas,
+        description: description ?? this.description,
       );
 
   Map<String, dynamic> toMap() => {
@@ -70,6 +74,7 @@ class Freelancer {
         'portfolios': portfolios,
         'user': user,
         'workAreas': workAreas,
+        'description': description,
       };
 
   String toJson() => json.encode(toMap());
@@ -116,6 +121,7 @@ class Freelancer {
       yearsExperience: map['yearsExperience'],
       user: map['user'],
       workAreas: was2,
+      description: map['description'],
     );
   }
   factory Freelancer.fromJson(String source) => Freelancer.fromMap(json.decode(source));

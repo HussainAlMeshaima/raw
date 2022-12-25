@@ -13,6 +13,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i23;
 import 'package:flutter/material.dart' as _i24;
+import 'package:raw/app/models/Freelancer.dart' as _i25;
 import 'package:raw/ui/views/add_freelancer/add_freelancer_view.dart' as _i19;
 import 'package:raw/ui/views/address/address_view.dart' as _i7;
 import 'package:raw/ui/views/admin/admin_view.dart' as _i14;
@@ -131,9 +132,13 @@ class RawRouter extends _i23.RootStackRouter {
       );
     },
     BookingRoute.name: (routeData) {
+      final args = routeData.argsAs<BookingRouteArgs>();
       return _i23.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i13.BookingView(),
+        child: _i13.BookingView(
+          args.freelancer,
+          key: args.key,
+        ),
         opaque: true,
       );
     },
@@ -468,14 +473,36 @@ class RentRoute extends _i23.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.BookingView]
-class BookingRoute extends _i23.PageRouteInfo<void> {
-  const BookingRoute()
-      : super(
+class BookingRoute extends _i23.PageRouteInfo<BookingRouteArgs> {
+  BookingRoute({
+    required _i25.Freelancer freelancer,
+    _i24.Key? key,
+  }) : super(
           BookingRoute.name,
           path: '/booking-view',
+          args: BookingRouteArgs(
+            freelancer: freelancer,
+            key: key,
+          ),
         );
 
   static const String name = 'BookingRoute';
+}
+
+class BookingRouteArgs {
+  const BookingRouteArgs({
+    required this.freelancer,
+    this.key,
+  });
+
+  final _i25.Freelancer freelancer;
+
+  final _i24.Key? key;
+
+  @override
+  String toString() {
+    return 'BookingRouteArgs{freelancer: $freelancer, key: $key}';
+  }
 }
 
 /// generated route for

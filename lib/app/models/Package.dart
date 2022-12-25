@@ -41,4 +41,8 @@ class Package {
       );
   factory Package.fromJson(String source) =>
       Package.fromMap(json.decode(source));
+
+
+  @override
+  String toString() => 'Package(image: $image, name: $name, description: $description, price: $price, count: $count)';
 }
