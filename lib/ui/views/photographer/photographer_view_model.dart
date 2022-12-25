@@ -6,9 +6,7 @@ import 'package:raw/app/services/FreelancerService.dart';
 class PhotographerViewModel extends BaseViewModel {
   PhotographerViewModel(context) : super(context);
   Future<void> init() async {
-    _freelancers = await _freelancerService
-        .getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
-
+    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
     toggleIsLoading();
   }
 
@@ -41,16 +39,6 @@ class PhotographerViewModel extends BaseViewModel {
 
   final FreelancerService _freelancerService = locator<FreelancerService>();
 
-  void toggleIsSelected({bool? value}) {
-    if (value != null) {
-      _isSelected = value;
-    } else {
-      _isSelected = !_isSelected;
-    }
-
-    notifyListeners();
-  }
-
   void toggleIsLoading({bool? value}) {
     if (value != null) {
       _isLoading = value;
@@ -72,9 +60,6 @@ class PhotographerViewModel extends BaseViewModel {
       getAllOutDoorFreelancers();
     }
   }
-
-  bool _isSelected = false;
-  bool get isSelected => _isSelected;
 
   List<Freelancer> _freelancers = [];
   List<Freelancer> get freelancers => _freelancers;
