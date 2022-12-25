@@ -6,19 +6,37 @@ import 'package:raw/app/services/FreelancerService.dart';
 class PhotographerViewModel extends BaseViewModel {
   PhotographerViewModel(context) : super(context);
   Future<void> init() async {
-    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
-
-    List<Freelancer>? temp = [];
-    temp = _freelancers
-        .where((Freelancer freelancer) =>
-            freelancer.freelancerTypes
-                ?.contains(FreelancerTypes.PHOTOGRAPHER) ??
-            false)
-        .toList();
-
-    _freelancers = temp;
+    _freelancers = await _freelancerService
+        .getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
 
     toggleIsLoading();
+  }
+
+  Future<void> getAllFreelancers() async {
+    toggleIsLoading(value: true);
+    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+    toggleIsLoading(value: false);
+  }
+
+  Future<void> getAllIndoorFreelancers() async {
+    toggleIsLoading(value: true);
+    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+
+    _freelancers = _freelancers.where((Freelancer freelancer) {
+      return freelancer.workAreas?.contains(WorkArea.INDOOR) ?? false;
+    }).toList();
+
+    toggleIsLoading(value: false);
+  }
+
+  Future<void> getAllOutDoorFreelancers() async {
+    toggleIsLoading(value: true);
+    _freelancers = await _freelancerService.getFreelancers(allowedTypes: [FreelancerTypes.PHOTOGRAPHER]);
+    _freelancers = _freelancers.where((Freelancer freelancer) {
+      return freelancer.workAreas?.contains(WorkArea.OUTDOOR) ?? false;
+    }).toList();
+
+    toggleIsLoading(value: false);
   }
 
   final FreelancerService _freelancerService = locator<FreelancerService>();
@@ -33,14 +51,26 @@ class PhotographerViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void toggleIsLoading() {
-    _isLoading = !_isLoading;
+  void toggleIsLoading({bool? value}) {
+    if (value != null) {
+      _isLoading = value;
+    } else {
+      _isLoading = !_isLoading;
+    }
     notifyListeners();
   }
 
   void changeFilterIndex(int index) {
+    if (_filterIndex == index) return;
+
     _filterIndex = index;
-    notifyListeners();
+    if (_filterIndex == 0) {
+      getAllFreelancers();
+    } else if (_filterIndex == 1) {
+      getAllIndoorFreelancers();
+    } else if (_filterIndex == 2) {
+      getAllOutDoorFreelancers();
+    }
   }
 
   bool _isSelected = false;

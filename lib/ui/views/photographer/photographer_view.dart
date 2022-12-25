@@ -49,23 +49,31 @@ class PhotographerView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 20.0, left: 10, right: 10),
-                  child: SizedBox(
-                    height: 900,
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: List.generate(
-                        model.freelancers.length,
-                        (int index) => freelancerCard(
-                          model,
-                          model.freelancers[index],
+                model.isLoading
+                    ? SizedBox(
+                        height: 300,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors().primary),
                         ),
-                      ),
-                    ),
-                  ),
-                )
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20.0, left: 10, right: 10),
+                        child: SizedBox(
+                          height: 900,
+                          child: ListView(
+                            scrollDirection: Axis.vertical,
+                            children: List.generate(
+                              model.freelancers.length,
+                              (int index) => freelancerCard(
+                                model,
+                                model.freelancers[index],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
               ],
             ),
           ),
@@ -95,13 +103,17 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
               Container(
                 height: 80,
                 width: 80,
+                clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.white,
                 ),
                 child: freelancer.user?.image == null
                     ? null
-                    : Image.network(freelancer.user!.image!),
+                    : Image.network(
+                        freelancer.user!.image!,
+                        fit: BoxFit.cover,
+                      ),
               ),
               const SizedBox(width: 30),
               Column(
@@ -111,9 +123,10 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
                   Text(
                     freelancer.user?.name ?? '-',
                     style: TextStyle(
-                        color: AppColors().primary,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: AppColors().primary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
@@ -129,12 +142,17 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
                             (freelancer.freelancerTypes!.length > 1)
                         ? Row(
                             children: [
-                              Text(
-                                freelancer.freelancerTypes?[0].name
-                                        .toString() ??
-                                    '-',
-                                style: const TextStyle(
-                                  color: Color(0xff717171),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  freelancer.freelancerTypes?[0].name
+                                          .toLowerCase()
+                                          .toString() ??
+                                      '-',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Color(0xff717171),
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 3),
@@ -148,23 +166,33 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
                                 ),
                               ),
                               const SizedBox(width: 3),
-                              Text(
-                                freelancer.freelancerTypes?[1].name
-                                        .toString() ??
-                                    '-',
-                                style:
-                                    const TextStyle(color: Color(0xff717171)),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  freelancer.freelancerTypes?[1].name
+                                          .toLowerCase()
+                                          .toString() ??
+                                      '-',
+                                  overflow: TextOverflow.ellipsis,
+                                  style:
+                                      const TextStyle(color: Color(0xff717171)),
+                                ),
                               ),
                             ],
                           )
                         : Row(
                             children: [
-                              Text(
-                                freelancer.freelancerTypes?[0].name
-                                        .toString() ??
-                                    '-',
-                                style:
-                                    const TextStyle(color: Color(0xff717171)),
+                              SizedBox(
+                                width: 160,
+                                child: Text(
+                                  freelancer.freelancerTypes?[0].name
+                                          .toLowerCase()
+                                          .toString() ??
+                                      '-',
+                                  overflow: TextOverflow.ellipsis,
+                                  style:
+                                      const TextStyle(color: Color(0xff717171)),
+                                ),
                               ),
                             ],
                           ),
@@ -190,7 +218,7 @@ Widget freelancerCard(PhotographerViewModel model, Freelancer freelancer) {
 }
 
 Widget filterItem({required PhotographerViewModel model, required int index}) {
-  return InkWell(
+  return GestureDetector(
     onTap: () => model.changeFilterIndex(index),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
